@@ -7,8 +7,8 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<h1> YOU ARE: <%= controller.controller_name -%> : <%= controller.action_name -%> </h1>
+<header class="where-am-i"> YOU ARE AT: <%= controller.controller_name -%> : <%= controller.action_name -%> </header>
 <%= yield %>
-
+<footer>a footer and some copyright info</footer>
 </body>
 </html>
