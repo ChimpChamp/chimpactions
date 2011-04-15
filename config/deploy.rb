@@ -2,7 +2,7 @@ default_run_options[:pty] = true
 set :use_sudo, false 
 set :ssh_options, {:forward_agent => true}
 on :start do    
- # `ssh-add`
+  #`ssh-add`
 end
 set :runner, 'deploy'
 set :admin_runner, 'deploy'
@@ -16,6 +16,7 @@ set :deploy_via, :remote_cache
 
 set :user, 'deploy'
 set :ssh_options, { :forward_agent => true }
+ 
 role :app, "c_git"
 role :web, "c_git"
 role :db,  "c_git", :primary => true
@@ -37,4 +38,5 @@ role :db,  "c_git", :primary => true
     desc "Link in the production database.yml"
     task :link_production_db do
       run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/test/dummy/config/database.yml"
+      run "ln -nfs #{deploy_to}/shared/db #{release_path}/test/dummy/db"
     end

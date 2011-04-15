@@ -1,12 +1,3 @@
-# Add RVM's lib directory to the load path.
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-
-# Load RVM's capistrano plugin.    
-require "rvm/capistrano"
-
-set :rvm_ruby_string, '1.9.2'
-set :rvm_type, :user  # Don't use system-wide RVM
-
 set :branch, "develop"
 set :application, "chimpactions"
 set :deploy_to, "/home/deploy/apps/deployed/chimpactions"
@@ -28,7 +19,6 @@ namespace :deploy do
   end
   
   task :restart, :roles => :app, :except => { :no_release => true } do
-  #  run "cd #{release_path}/test/dummy && rvm use rails3 && bundle install"
     run "/sbin/service tst2 restart #{application}"
   end
   
