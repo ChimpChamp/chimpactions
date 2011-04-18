@@ -1,20 +1,31 @@
+<section>
 <article>
-<h1 class="v-large">chimpActions</h1>
+<h1 class="v-large logo">chimpActions</h1>
 <p>the thing that does stuff! </p>
 </article>
+</section>
+<ul class="checklist">
+<% if Chimpactions::Setup.ok? %>
+<li> <h1 class="v-large">The Chimpactions gem is loaded.</h1> </li>
 
-<% if Chimpactions %>
+<% end %>
+<li><h1 class="v-large">Chimpactions is loaded on your model:</h1>
+      <span><%= debug(@registered[0])%></span>
+</li>
+</ul>
+<section>
+  <article>
+    <%=render :partial => 'api_change'%>
+  </article>
+</section>
+
   <section>
     <article>
-      <h1 class="v-large">THE Chimpactions gem is loaded and ready for action.</h1>
-      <h1>(i just checked)</h1>
+      <h1 class="v-large">Your lists are here now....</h1>
+      <h1>I will show them :</h1>
     </article>
   </section>
-<% end %>
-
-  <section>
-    <article>
-      <h1 class="v-large">Not much to do though.</h1>
-      <h1>'cause it's no written</h1>
-    </article>
+  
+  <section class='chimp-list'>
+    <%= render :partial => 'list', :collection => @lists%>
   </section>

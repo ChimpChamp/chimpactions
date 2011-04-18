@@ -1,6 +1,6 @@
 Chimpactions.setup do |config|
   # Your MailChimp API key.
-  config.mailchimp_api_key = "your_mailchimp_api_key"
+  config.mailchimp_api_key = "049ffbb6adcbc129d979487ee9864e23-us1"#"aefe9dae400a886bf13ac7eee94e7528-us2"
   # Mappings of YOUR MailChimp Merge Variables
   # => This list should include ANY merge variables throughout your MailChimp
   #    account from any and all lists.
@@ -8,12 +8,14 @@ Chimpactions.setup do |config|
   #    either not set by your model, or not in the particular list.
   # => If your model does not respond_to?('your_models_attribute_or_method')
   #    the merge variable will be skipped (not sent).
-  # @format :: {'MAILCHIMP_MERGE_VAR' => 'model_attribute_or_method', 'MAILCHIMP_MERGE_VAR' => 'model_attribute_or_method'}
+  # @format :: {'MAILCHIMP_CONSTANT' => 'your_models_attribute_or_method'}
   config.merge_map = {
     'FNAME'=> 'first_name',
     'LNAME' => 'last_name',
-    'EMAIL' => 'email'
+    'EMAIL' => 'email',
+    'FAVORITE_COLOR' => 'favorite_color'
   }
   # Your MailChimp SES key.
-  config.mailchimp_ses_key = "your_mailchimp_ses_key"
+  config.mailchimp_ses_key = "0987654321"
 end
+Chimpactions.for(User)

@@ -1,0 +1,33 @@
+h1. Chimpactions
+
+p. Made possible by the generous support of the "MailChimp Integration Fund":http://www.mailchimp.com/about/integration-fund/ .
+
+h2. Ayche two
+
+h3. Ayche three
+
+__________
+
+* Here 
+* is a list
+* of things
+
+This project rocks and uses MIT-LICENSE.
+
+<code>
+lists = ChimpActions.available_lists  
+</code>
+
+ One spaced text.
+ 
+  Two spaced text.
+
+p. a paragraph
+
+_italics_
+
+-strkethrough-
+
+*BOLDE*
+
+"You suck":http://circuitllc.com

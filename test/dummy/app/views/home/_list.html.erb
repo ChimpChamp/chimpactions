@@ -1,0 +1,9 @@
+<article class='chimp-list'>
+  <header><%= list.name%></header>
+  <h1><%= list.id %></h1>
+    <div class="clearfix">
+    <span><h1>Stats:</h1><%= debug(list.data)%></span>
+    <span><h1>List data: </h1><%= debug(list.stats.data)%> </span>
+    <span><h1>Merge Variables: </h1><%= debug(list.merge_vars.collect{|mv| mv['tag']})%> </span>
+    </div>
+</article>  

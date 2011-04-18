@@ -9,10 +9,10 @@ module Chimpactions
         template "chimpactions_initializer.rb", "config/initializers/chimpactions.rb"
       end
 
-      def copy_locale
-        copy_file "../../../config/locales/en.yml", "config/locales/devise.en.yml"
-      end
-
+      # def copy_locale
+      #       copy_file "../../../config/locales/en.yml", "config/locales/devise.en.yml"
+      #     end
+    
       def show_readme
         readme "README" if behavior == :invoke
       end
