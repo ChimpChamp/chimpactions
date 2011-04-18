@@ -1,6 +1,6 @@
 Chimpactions.setup do |config|
   # Your MailChimp API key.
-  config.mailchimp_api_key = "aefe9dae400a886bf13ac7eee94e7528-us2" #"049ffbb6adcbc129d979487ee9864e23-us1"
+  config.mailchimp_api_key = "aefe9dae400a886bf13ac7eee94e7528-us2"
   # Mappings of YOUR MailChimp Merge Variables
   # => This list should include ANY merge variables throughout your MailChimp
   #    account from any and all lists.
