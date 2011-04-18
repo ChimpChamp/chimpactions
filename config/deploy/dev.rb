@@ -19,7 +19,8 @@ namespace :deploy do
   end
   
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "/sbin/service tst2 restart #{application}"
+    run "/sbin/service tst2 stop #{application}"
+    run "/sbin/service tst2 start #{application}"
   end
   
 end
