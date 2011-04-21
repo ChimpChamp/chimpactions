@@ -5,6 +5,7 @@ module Chimpactions
     mattr_reader :errors
     @@errors = ActiveSupport::OrderedHash.new
     
+    # Make sure we have the right info to proceed.
     def self.ensure_initialization
       @@errors = ActiveSupport::OrderedHash.new
       self.error(:api_key, "Is not set!") if Chimpactions.mailchimp_api_key == "your_mailchimp_api_key" || Chimpactions.mailchimp_api_key.nil?
@@ -13,10 +14,13 @@ module Chimpactions
       @@message = "Chimpactions::Setup.initialize"
     end
     
+    # Were there errors in the setup ?
     def self.ok?
       errors.empty?
     end
-
+    
+    # Check the gibbon connection to MailChimp
+    # Verify that the API key is good.
     def self.verify
       begin
         Chimpactions.socket.chimpChatter()
@@ -27,6 +31,7 @@ module Chimpactions
     end
     
     private
+    # Register an error in the setup.
     def self.error(parameter,message)
       errors[parameter] = message
     end

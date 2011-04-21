@@ -1,10 +1,13 @@
 module Chimpactions
+  # The List class does all kinds of things with your MailChimp lists.
   class List
     include Chimpactions::Utility
     
     # The system-wide single socket to the MailChimp mothership.
     @@socket = Chimpactions.socket
     
+    # Receiver for Observer pattern.
+    # Sets the class level socket to the current Chimpactions module socket.
     def self.new_socket
       @@socket = Chimpactions.socket
     end
@@ -19,10 +22,13 @@ module Chimpactions
       @stats = Stats.new(@raw.delete('stats'))
       self
     end
-  
+    
+    #The raw list data.
+    #@return [Hash]
     def data
       @raw
     end
+
   # MC API v1.3
     # def listMergeVarAdd(string apikey, string id, string tag, string name, array options)
     #   #Add a new merge tag to a given list
@@ -53,7 +59,8 @@ module Chimpactions
     #   #Return the Webhooks configured for the given list 
     # end
   # END MC API
-  
+
+    #The available merge varaibles for the List.
     def merge_vars
       @merge_vars ||= @@socket.listMergeVars(:id => id)
     end
@@ -83,7 +90,9 @@ module Chimpactions
     def remove_webhook(opts)
       @@socket.listWebhookDel({:id => id}.merge(opts) )
     end
-  
+    
+    # The Stats class is a simple wrapper for statistics about the List.
+    # <code> my_list.stats.subscriber_total #=> 243 </code>
     class Stats
       include Chimpactions::Utility
     
@@ -92,6 +101,7 @@ module Chimpactions
         self
       end   
       
+      #The raw data array of statistic info.
       def data
         @raw
       end

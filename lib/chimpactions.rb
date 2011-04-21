@@ -1,3 +1,5 @@
+# Holds MailChimp account level information
+# Should set up wit an initializer.
 module Chimpactions
   # ruby wrapper gem for the MailChimp API
   # https://github.com/amro/gibbon
@@ -11,20 +13,25 @@ module Chimpactions
   autoload :Setup, 'chimpactions/setup' 
   autoload :ListNotifier, 'chimpactions/notifier' 
   
+  # Obersver pattern untility class attribute.
   mattr_accessor :observers
   @@observers = []
-    
+  
+  # Observer pattern untility.  
   def self.add_observer(observer)
     @@observers << observer
   end
   
+  # Observer pattern notify untility. 
   def self.notify_observers(mod)
     @@observers.each do |o|
       o.update(mod)
     end
   end
   
+  # Ensure the module has an observer for communicating with List objects.
   add_observer Chimpactions::ListNotifier.new 
+  
 # BELOW ATTRIBUTES SET IN INSTALLED INITIALIZER
 # => try rake chimpactions:install for full option initilaizer
 
@@ -48,7 +55,13 @@ module Chimpactions
 
   # the gibbon API wrapper object for communication with MailChimp servers
   mattr_accessor :socket
-
+  
+  # Assign a local class to the Chimpactions module.
+  # @param [Object] The local object to inherit Chimpactions::Subscriber methods.
+  # - Must respond_to? 'email'
+  # - For methods defined in the Chimpactions merge_map
+  # -- can to respond_to? each method
+  # -- if it doesn not, Chimpactions will not send the merge variable or value.
   def self.for(klass)
     raise Chimpactions::Exception::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.new.respond_to?(:email)
     klass.class_eval <<-INC
@@ -57,6 +70,9 @@ module Chimpactions
     @@registered_classes << klass if !@@registered_classes.include? klass
   end
   
+  # Change the MailChimp used by the system.
+  # Notifies all list objects and reloads the available lists from the new account.
+  # @param [String] A new API key
   def self.change_account(new_api_key)
     self.mailchimp_api_key = new_api_key
     self.socket = Gibbon::API.new(self.mailchimp_api_key)
@@ -64,6 +80,12 @@ module Chimpactions
     self.available_lists(true)
   end
 
+  # The registered class
+  # @return [ClassName]
+  def registered_class
+    self.registered_classes[0]
+  end
+  
   # Default setup for Chimpactions. Run rails generate chimpactions_install to create
   # a fresh initializer with configuration options.
   def self.setup

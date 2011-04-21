@@ -1,32 +1,60 @@
 module Chimpactions
+  # Defines a single step to take given a set of conditions.
   class Action
-    # Default setup for Chimpactions. Run rails generate chimpactions_install to create
-    # a fresh initializer with configuration options.
-    def self.setup
-      yield self
-    end
     
     #The Chimpaction::List method to execute for this action.
-    attr_reader :action
+    attr_accessor :action
     #The Chimpactions::List object to excute the action on.
     attr_accessor :list
-    #The Chimpaction::Subscriber to execute the action with.
-    attr_accessor :subscriber
     
     def initialize(params)
       validate_params(params)
-      self.list = params[:list]
-      self.subscriber = params[:subscriber]
-      @action = params[:action]
+      params.each_pair do |key,val|
+        self.send(key.to_s << "=", val)
+      end
     end
     
-    def execute
-      list
+    # Check the Object attributes against the specified logic.
+    # @param [String,String,Subscriber,String] Subscriber method name, = || != || < || >, Subscriber Object, value to test against
+    def perform?(method, comparitor, subscriber, value)
+      comparitor = '==' if comparitor == '='
+      value = "\"#{value}\"" if value.class.name == "String"
+      eval "subscriber.#{method} #{comparitor} #{value}"
     end
     
+    # Utility for casting a String to a 'best guess' Type
+    # @param [Object]
+    # @return [String, Integer, TrueClass, FalseClass]
+    def cast_value(val)
+      raise ArgumentError.new("Your value is not a String! (it's a #{val.class})") if val.class != String
+      
+      if (Float val rescue false)
+        Float val
+      elsif (Bignum val rescue false)
+        Bignum val
+      elsif (Integer val rescue false)
+        Integer val
+      elsif val =~ /^true$/i || val == true
+        true
+      elsif val =~ /^false$/i || val == false
+        false
+      else
+        val
+      end
+    end
+    
+    # Allows this action to be performed on mutiple Subscriber objects.
+    def perform_on(*subscribers)
+      subscribers.flatten!.each do |s|
+        puts s
+      end
+    end
+    
+    # Ensures initialization parameters are valid.
+    # @param [Hash]
     def validate_params(p)
-      if ( !p[:action] || !p[:list] || !p[:subscriber] ) || !p[:list].respond_to?(p[:action].to_sym) || !p[:list].is_a?(Chimpactions::List) || !p[:subscriber].is_a?(Chimpactions::Subscriber)
-        raise ArgumentError, "Chimpactions::Action expects : {:list => Chimpactions::List, :subscriber => Chimpactions::Subscriber (or mixed-in), :action => Chimpactions::List method name}", caller
+      if ( !p[:action] || !p[:list] || !p[:subscriber] ) || !Chimpactions.registered_class.respond_to?(p[:action].to_sym) || !p[:list].is_a?(Chimpactions::List)
+        raise ArgumentError, "Chimpactions::Action expects : {:list => Chimpactions::List, :action => Chimpactions::Subscriber method name}", caller
       end
     end
     

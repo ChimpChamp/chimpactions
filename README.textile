@@ -1,11 +1,41 @@
 h1. Chimpactions
 
+Easily move contacts between MailChimp lists.
+
+h2. Installation
+
+<code>gem install chimpactions</code>
+
+<code>rake chimpactions:install</code>
+
+h2. Requirements
+
+A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
+
+h2. Usage
+
+<pre> require 'chimpactions' </pre>
+
+h3. Your MailChimp Lists
+
+h3. Adding a subscriber to a list
+
+h3. Moving a subscriber between lists
+
+h3. Defining an Action
+
+h2. Rails
+
+h2. License
+
+h2. Thanks
+
 p. Made possible by the generous support of the "MailChimp Integration Fund":http://www.mailchimp.com/about/integration-fund/ .
 
-h2. Ayche two
+h2. Copyrights
 
-h3. Ayche three
 
+* "gibbon":http://rubygems.org/gems/gibbon/ *_The uber-simple MailChimp API wrapper_*
 __________
 
 * Here 

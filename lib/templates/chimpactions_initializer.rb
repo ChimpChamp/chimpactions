@@ -17,3 +17,4 @@ Chimpactions.setup do |config|
   # Your MailChimp SES key.
   config.mailchimp_ses_key = "your_mailchimp_ses_key"
 end
+Chimpactions.for(YourLocalModel)
