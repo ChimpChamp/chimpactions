@@ -9,4 +9,5 @@ doc/
 ndoc/
 .yardoc/
 Capfile
-cap/*
+config/deploy*
+config/deploy/*
