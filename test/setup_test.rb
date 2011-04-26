@@ -7,6 +7,12 @@ class SetupTest < ActiveSupport::TestCase
       Chimpactions.setup do |config|
         config.mailchimp_api_key = "secret_mailchimp_api_key"
         config.mailchimp_ses_key = "secret_mailchimp_ses_key"
+        config.merge_map = {
+          'FNAME'=> 'first_name',
+          'LNAME' => 'last_name',
+          'EMAIL' => 'email',
+          'FAV_COL' => 'favorite_color'
+        }
       end
     end
   
@@ -19,7 +25,6 @@ class SetupTest < ActiveSupport::TestCase
     
     should "fail to connect with a bad API key" do
       assert_equal Chimpactions::Setup.verify, false
-      puts Chimpactions::Setup.errors
     end
     
   end

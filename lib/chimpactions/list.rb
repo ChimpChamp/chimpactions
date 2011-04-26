@@ -3,6 +3,7 @@ module Chimpactions
   class List
     include Chimpactions::Utility
     
+    cattr_reader :socket
     # The system-wide single socket to the MailChimp mothership.
     @@socket = Chimpactions.socket
     

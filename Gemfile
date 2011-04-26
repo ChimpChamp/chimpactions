@@ -12,8 +12,6 @@ gem "gibbon", ">= 0.1.5"
 group :test do
 gem "factory_girl"
 gem "shoulda"
-#gem "rspec", :lib => false
-#gem "rspec-rails", :lib => false, :version => "~> 1.3.0"
-#gem "thoughtbot-factory_girl"
-#gem 'thoughtbot-shoulda'
+gem 'simplecov'
+gem 'mocha'
 end

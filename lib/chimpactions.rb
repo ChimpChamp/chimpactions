@@ -9,7 +9,7 @@ module Chimpactions
   autoload :Subscriber, 'chimpactions/subscriber'
   autoload :Utility, 'chimpactions/utility'
   autoload :Action, 'chimpactions/action'
-  autoload :Exception, 'chimpactions/exception'
+   require 'chimpactions/exception'
   autoload :Setup, 'chimpactions/setup' 
   autoload :ListNotifier, 'chimpactions/notifier' 
   
@@ -51,6 +51,25 @@ module Chimpactions
   mattr_accessor :registered_classes
   @@registered_classes = Array.new
 
+  # Require the user to reply to the MailChimp system before adding to list.
+  mattr_accessor :default_double_optin
+  @@default_double_optin = false
+  
+  #Have MailChimp send the "Welcome" email for the list immediately on subscribing.
+  mattr_accessor :default_send_welcome
+  @@default_send_welcome = true
+  
+  # When a class includes Chimpactions::Subscriber, it is registered here
+  mattr_accessor :registered_classes
+  @@registered_classes = Array.new
+
+  # The default email type when subscribing
+  mattr_accessor :default_email_type
+  @@default_email_type = 'html'
+  
+  # Udpate existing subscriber (to prevent already subscribed error)
+  mattr_accessor :default_update_existing
+  @@default_update_existing = true
 # END INITIALIZER
 
   # the gibbon API wrapper object for communication with MailChimp servers
@@ -63,7 +82,7 @@ module Chimpactions
   # -- can to respond_to? each method
   # -- if it doesn not, Chimpactions will not send the merge variable or value.
   def self.for(klass)
-    raise Chimpactions::Exception::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.new.respond_to?(:email)
+    raise Chimpactions::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.new.respond_to?(:email)
     klass.class_eval <<-INC
       include Chimpactions::Subscriber
     INC
@@ -102,6 +121,29 @@ module Chimpactions
     else
       @available_lists ||= socket.lists['data'].map{|raw_list| Chimpactions::List.new(raw_list)}
     end
+  end
+  
+  
+  # Searches the MailChimp list hash by id, web_id, name
+  # @param [String, Fixnum, Chimpactions::List] list
+  # @return [Chimpactions::List] The Chimpactions List object
+  def self.list(list)
+    case list.class.name
+      when "Chimpactions::List"
+        #if it's a List, just send it back...
+        return_list = [list]
+      when "String"
+        # The List.name , id, or web_id ?
+        return_list = Chimpactions.available_lists.select{|l| l.id == list}
+        return_list = Chimpactions.available_lists.select{|l| l.web_id == list.to_i} if return_list.empty?
+        return_list = Chimpactions.available_lists.select{|l| l.name == list} if return_list.empty?
+      when "Fixnum"
+        return_list = Chimpactions.available_lists.select{|l| l.web_id == list.to_i}
+      else 
+        return_list = []
+    end
+    raise Chimpactions::NotFoundError.new("Could not locate #{list} in your account. ") if return_list.empty?
+    return_list[0]
   end
   
   # Find a list by any list attribute

@@ -20,11 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.add_dependency('gibbon', '>= 0.1.5')
 
-
   s.post_install_message = %[
-===========================================================================
-Congratulations!
 chimpactions has been installed.
-===========================================================================
 ]
 end

@@ -16,5 +16,8 @@ Chimpactions.setup do |config|
   }
   # Your MailChimp SES key.
   config.mailchimp_ses_key = "your_mailchimp_ses_key"
+  config.default_double_optin = false #default false Require the user to reply to the MailChimp system before adding to list.
+  config.default_send_welcome = true #default true Have MailChimp send the "Welcome" email for the list immediately.
+  config.default_email_type =  "html"
 end
 Chimpactions.for(YourLocalModel)

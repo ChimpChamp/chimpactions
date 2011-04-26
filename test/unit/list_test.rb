@@ -5,12 +5,12 @@ class ListTest < ActiveSupport::TestCase
 
   context "Inspecting for awe." do
     setup do
-      @awesome = false
+      mock_setup
     end
     
     
-    should "be awesome" do
-      assert_equal @awesome, false
+    should "do something" do
+      assert_equal false, false
     end
     
   end
