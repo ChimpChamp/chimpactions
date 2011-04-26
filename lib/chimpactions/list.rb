@@ -82,14 +82,14 @@ module Chimpactions
     # @param [Hash] _REQUIRED_ : :url => 'a valid url'
     # @return [true, Hash] true if ok, otherwise an error hash
     def set_webhook(opts)
-      @@socket.listWebhookAdd({:id => id}.merge(opts) )
+      @@socket.listWebhookAdd({:id => id}.merge(opts) ) == "true"
     end
     
     # removes the specified url webhook for this List
     # @param [Hash] _REQUIRED_ : :url => 'a valid, currently used url'
     # @return [true, Hash] true if ok, otherwise an error hash
     def remove_webhook(opts)
-      @@socket.listWebhookDel({:id => id}.merge(opts) )
+      @@socket.listWebhookDel({:id => id}.merge(opts) ) == "true"
     end
     
     # The Stats class is a simple wrapper for statistics about the List.

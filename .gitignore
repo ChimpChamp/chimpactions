@@ -11,3 +11,4 @@ ndoc/
 Capfile
 config/deploy*
 config/deploy/*
+coverage
