@@ -40,6 +40,7 @@ def mock_setup
   end
   @raw_data = Factory.build(:raw_lists)
   Gibbon::API.any_instance.stubs(:lists).returns(raw_list_hash)
+  Chimpactions.for(User)
 end
 
 def real_setup
@@ -56,4 +57,5 @@ Chimpactions.setup do |config|
   config.mailchimp_ses_key = "0987654321"
 end
 Chimpactions.change_account('aefe9dae400a886bf13ac7eee94e7528-us2')
+Chimpactions.for(User)
 end

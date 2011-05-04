@@ -1,0 +1,19 @@
+mailchimp_api_key: aefe9dae400a886bf13ac7eee94e7528-us2
+# Mappings of YOUR MailChimp Merge Variables
+# => This list should include ANY merge variables throughout your MailChimp
+#    account from any and all lists.
+# => Chimpactions will fail gracefully (i.e. not try to send) on any varibles
+#    either not set by your model, or not in the particular list.
+# => If your model does not respond_to?('your_models_attribute_or_method')
+#    the merge variable will be skipped (not sent).
+# @format :: MAILCHIMP_MERGE_VAR: 'model_attribute_or_method'
+merge_map:
+  FNAME: first_name
+  LNAME: last_name
+  EMAIL: email
+  FAV_COL: favorite_color
+mailchimp_ses_key: 0987654321
+local_model: User
+default_double_optin: false #default false Require the user to reply to the MailChimp system before adding to list.
+default_send_welcome: true #default true Have MailChimp send the "Welcome" email for the list immediately.
+default_email_type:  "html"

@@ -4,7 +4,7 @@ require "chimpactions/version"
 
 Gem::Specification.new do |s|
   s.name        = "chimpactions"
-  s.version     = TemplateWrapper::VERSION
+  s.version     = Chimpactions::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Peter Bonnell"]
   s.email       = ["gems@circuitllc.com"]

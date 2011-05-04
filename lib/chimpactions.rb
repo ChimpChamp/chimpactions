@@ -101,14 +101,18 @@ module Chimpactions
 
   # The registered class
   # @return [ClassName]
-  def registered_class
+  def self.registered_class
     self.registered_classes[0]
   end
   
   # Default setup for Chimpactions. Run rails generate chimpactions_install to create
   # a fresh initializer with configuration options.
-  def self.setup
-    yield self
+  def self.setup(config)
+    self.mailchimp_api_key = config['mailchimp_api_key']
+    self.merge_map = config['merge_map']
+    self.mailchimp_ses_key = config['mailchimp_ses_key']
+    self.for(Kernel.const_get(config['local_model']))
+    #yield self
     self.socket = Gibbon::API.new(self.mailchimp_api_key)
   end
 

@@ -45,7 +45,5 @@ class SubscriberTest < ActiveSupport::TestCase
       assert_equal @user.send_response_email(@first_list,'Some name'), true
     end
     
-    
-    
   end # context 
 end #Class

@@ -9,6 +9,7 @@ class ListTest < ActiveSupport::TestCase
       @user = User.new(:email => "subscriber@notanemail.com", :first_name => "FirstName", :last_name =>"LastName", :favorite_color => "red")
       @first_list = Chimpactions.available_lists[0]
       @second_list = Chimpactions.available_lists[1]
+      @second_list.remove_webhook(:url => "circuitllc.com")
     end
     
     teardown do
@@ -20,7 +21,7 @@ class ListTest < ActiveSupport::TestCase
     end
     
     should "add a webhook" do
-      assert_equal @second_list.set_webhook(:url => "circuitllc.com"), true
+      assert_equal true, @second_list.set_webhook(:url => "circuitllc.com")
     end
     
     should "remove the webhook" do

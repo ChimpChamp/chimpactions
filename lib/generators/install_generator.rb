@@ -6,6 +6,7 @@ module Chimpactions
       desc "Creates a Chimpactions initializer and copy locale files to your application."
       def copy_initializer
         template "chimpactions_initializer.rb", "config/initializers/chimpactions.rb"
+        template "chimpactions.yml", "config/initializers/chimpactions.yml"
       end
     
       def show_readme
