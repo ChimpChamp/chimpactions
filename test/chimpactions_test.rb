@@ -3,15 +3,7 @@ require 'test_helper'
 class ChimpactionsTest < ActiveSupport::TestCase
   context "List checks" do
     setup do
-      Chimpactions.setup do |config|
-        config.mailchimp_api_key = 'notreallyanapikey'
-        config.merge_map = {
-          'FNAME'=> 'first_name',
-          'LNAME' => 'last_name',
-          'EMAIL' => 'email',
-          'FAV_COL' => 'favorite_color'
-        }        
-      end
+      mock_setup
       @raw_data = Factory.build(:raw_lists)
       Gibbon::API.any_instance.stubs(:lists).returns(raw_list_hash)
     end

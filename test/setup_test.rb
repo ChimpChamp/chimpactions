@@ -4,21 +4,19 @@ require 'chimpactions/setup'
 class SetupTest < ActiveSupport::TestCase
   context "With a good initializer" do
     setup do
-      Chimpactions.setup do |config|
-        config.mailchimp_api_key = "secret_mailchimp_api_key"
-        config.mailchimp_ses_key = "secret_mailchimp_ses_key"
-        config.merge_map = {
+      Chimpactions.setup({'mailchimp_api_key' => "goodfake_mailchimp_api_key",
+        'mailchimp_ses_key' => "goodfake_mailchimp_ses_key",
+        'merge_map' => {
           'FNAME'=> 'first_name',
           'LNAME' => 'last_name',
           'EMAIL' => 'email',
-          'FAV_COL' => 'favorite_color'
-        }
-      end
+          'FAV_COL' => 'favorite_color'},
+        'local_model' => 'User'})
     end
   
     should "set authorization keys and be ok?" do
-      assert_equal Chimpactions.mailchimp_api_key, "secret_mailchimp_api_key"
-      assert_equal Chimpactions.mailchimp_ses_key, "secret_mailchimp_ses_key"
+      assert_equal Chimpactions.mailchimp_api_key, "goodfake_mailchimp_api_key"
+      assert_equal Chimpactions.mailchimp_ses_key, "goodfake_mailchimp_ses_key"
       Chimpactions::Setup.ensure_initialization
       assert_equal Chimpactions::Setup.ok?, true
     end
@@ -31,11 +29,10 @@ class SetupTest < ActiveSupport::TestCase
 
   context "With no initializer" do 
     setup do
-      Chimpactions.setup do |config|
-        config.mailchimp_api_key = nil
-        config.merge_map = nil
-        config.mailchimp_ses_key = nil
-      end
+      Chimpactions.setup({'mailchimp_api_key' => nil,
+        'mailchimp_ses_key' => nil,
+        'merge_map' => nil,
+        'local_model' => 'User'})
     end
   
     should "cause initialization failure" do
@@ -46,15 +43,14 @@ class SetupTest < ActiveSupport::TestCase
   
   context"With default initializer" do
     setup do
-      Chimpactions.setup do |config|
-        config.mailchimp_api_key = "your_mailchimp_api_key"
-        config.merge_map = {
+      Chimpactions.setup({'mailchimp_api_key' => "your_mailchimp_api_key",
+        'mailchimp_ses_key' => "your_mailchimp_ses_key",
+        'merge_map' => {
           'FNAME'=> 'first_name',
           'LNAME' => 'last_name',
-          'EMAIL' => 'email'
-        }
-        config.mailchimp_ses_key = "your_mailchimp_ses_key"
-      end
+          'EMAIL' => 'email',
+          'FAV_COL' => 'favorite_color'},
+        'local_model' => 'User'})
     end
 
     should "setup initializer" do

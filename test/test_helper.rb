@@ -29,33 +29,32 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 require 'mocha'
 
 def mock_setup
-  Chimpactions.setup do |config|
-    config.mailchimp_api_key = 'notreallyanapikey'
-    config.merge_map = {
-      'FNAME'=> 'first_name',
-      'LNAME' => 'last_name',
-      'EMAIL' => 'email',
-      'FAV_COL' => 'favorite_color'
-    }        
-  end
-  @raw_data = Factory.build(:raw_lists)
-  Gibbon::API.any_instance.stubs(:lists).returns(raw_list_hash)
-  Chimpactions.for(User)
-end
-
-def real_setup
-Chimpactions.setup do |config|
-    # Your MailChimp API key.
-  config.mailchimp_api_key = "aefe9dae400a886bf13ac7eee94e7528-us2"
-  config.merge_map = {
+  Chimpactions.setup(
+  {'mailchimp_api_key' => "notreallanapikey",
+  'merge_map' => {
     'FNAME'=> 'first_name',
     'LNAME' => 'last_name',
     'EMAIL' => 'email',
     'FAV_COL' => 'favorite_color'
-  }
-  # Your MailChimp SES key.
-  config.mailchimp_ses_key = "0987654321"
+  },
+  'local_model' => 'User'
+})
+
+  @raw_data = Factory.build(:raw_lists)
+  Gibbon::API.any_instance.stubs(:lists).returns(raw_list_hash)
 end
+
+def real_setup
+Chimpactions.setup(
+  {'mailchimp_api_key' => "aefe9dae400a886bf13ac7eee94e7528-us2",
+  'merge_map' => {
+    'FNAME'=> 'first_name',
+    'LNAME' => 'last_name',
+    'EMAIL' => 'email',
+    'FAV_COL' => 'favorite_color'
+  },
+  'mailchimp_ses_key' => "0987654321",
+  'local_model' => 'User'
+})
 Chimpactions.change_account('aefe9dae400a886bf13ac7eee94e7528-us2')
-Chimpactions.for(User)
 end

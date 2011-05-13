@@ -1,1 +1,1 @@
-Chimpactions.setup(YAML.load_file("config/initializers/chimpactions.yml"))
+Chimpactions.setup(YAML.load_file("#{File.dirname(__FILE__)}/chimpactions.yml"))

@@ -4,8 +4,7 @@ module Chimpactions
 #Once initialized, the local model inherits all Subscriber methods.
 #ex.
 #<pre>
-#class User
-# Chimpactions.for(User) # must at least respond_to 'email'
+# see chimpaction.yml for initializtaion options
 #</pre>
   module Subscriber
     

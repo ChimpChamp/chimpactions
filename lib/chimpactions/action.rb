@@ -61,9 +61,13 @@ module Chimpactions
      if  !registered_class.respond_to?(p[:action].to_sym)
        error = ":action #{@registered_class} to respond to #{p[:action]}"
      elsif !registered_class.respond_to?(p[:whenn].to_sym)
-       error = ":whenn #{registered_class} to repspond to #{p[:whenn]}"
-     elsif !p[:list].is_a?(Chimpactions::List)
-       error = ":list must be a Chimpactions::List object (you passed #{p[:list]})"
+       error = ":whenn #{registered_class} to respond to #{p[:whenn]}"
+     end
+     list_object = Chimpactions.list(p[:list]) rescue false 
+     if !list_object
+       error = ":list could not find your list! (you passed #{p[:list]})"
+     else
+       p[:list] = list_object
      end
     raise ArgumentError, "Chimpactions::Action expects #{error}", caller if !error.nil?
     end
