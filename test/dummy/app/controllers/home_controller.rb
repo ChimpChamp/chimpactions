@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   
   def index
     @lists = Chimpactions.available_lists
-    @registered = Chimpactions.registered_classes
+    @registered = Chimpactions.registered_classes[0].name
     @actions = Chimpactions.actions
   end
   

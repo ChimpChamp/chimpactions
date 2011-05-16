@@ -1,6 +1,6 @@
 <ul>
 <% @actions.each do |action|%>
-  <li> When <%= Chimpactions::registered_class.name %> <%= action.whenn %> <%= action.is %> <%= action.value %> => <%= Chimpactions::registered_class.name %>.<%= action.action %> (<%= action.list %>) 
+  <li> When a <%= @registered %> <%= action.whenn %> <%= action.is %> <%= action.value %> => <%= @registered%>.<%= action.action %> (<%= action.list %>) 
   </li>
 <%end%>
 </ul>
