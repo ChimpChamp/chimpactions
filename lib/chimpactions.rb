@@ -58,10 +58,6 @@ module Chimpactions
   #Have MailChimp send the "Welcome" email for the list immediately on subscribing.
   mattr_accessor :default_send_welcome
   @@default_send_welcome = true
-  
-  # When a class includes Chimpactions::Subscriber, it is registered here
-  mattr_accessor :registered_classes
-  @@registered_classes = Array.new
 
   # The default email type when subscribing
   mattr_accessor :default_email_type
@@ -71,6 +67,9 @@ module Chimpactions
   mattr_accessor :default_update_existing
   @@default_update_existing = true
 # END INITIALIZER
+
+  mattr_accessor :actions
+  @@actions = Array.new
 
   # the gibbon API wrapper object for communication with MailChimp servers
   mattr_accessor :socket
@@ -82,6 +81,7 @@ module Chimpactions
   # -- can to respond_to? each method
   # -- if it doesn not, Chimpactions will not send the merge variable or value.
   def self.for(klass)
+    klass = Kernel.const_get(klass.to_s.capitalize)
     raise Chimpactions::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.new.respond_to?(:email)
     klass.class_eval <<-INC
       include Chimpactions::Subscriber
@@ -108,12 +108,16 @@ module Chimpactions
   # Default setup for Chimpactions. Run rails generate chimpactions_install to create
   # a fresh initializer with configuration options.
   def self.setup(config)
+   # puts config
     self.mailchimp_api_key = config['mailchimp_api_key']
     self.merge_map = config['merge_map']
     self.mailchimp_ses_key = config['mailchimp_ses_key']
-    self.for(Kernel.const_get(config['local_model']))
-    #yield self
     self.socket = Gibbon::API.new(self.mailchimp_api_key)
+    if config['actions']
+      config['actions'].each do |action|
+        self.actions << Chimpactions::Action.new(action)
+      end
+    end
   end
 
   # Queries your MailChimp account for available lists.

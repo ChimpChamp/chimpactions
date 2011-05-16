@@ -15,12 +15,6 @@ class ActionTest < ActiveSupport::TestCase
       
     end
     
-    should "not allow the creation af an Action that does not repspond_to properly" do
-      assert_raise Chimpactions::ArgumentError do Chimpactions::Action.new({:action => "move_to", :list => Chimpactions.available_lists[1], :whenn => "not_a_method", :is => '=', :value => true}) end;
-      assert_raise Chimpactions::ArgumentError do Chimpactions::Action.new({:action => "not_a_method", :list => Chimpactions.available_lists[1], :whenn => "is_great", :is => '=', :value => true}) end;
-      assert_raise Chimpactions::ArgumentError do Chimpactions::Action.new({:action => "move_to", :list => "Not a List Object", :whenn => "is_great", :is => '=', :value => true}) end;
-    end
-    
     should "return the appropriate class object when cast" do
       assert_equal Float, @action1.cast_value("123").class
       assert_equal Float, @action1.cast_value("123.00234").class

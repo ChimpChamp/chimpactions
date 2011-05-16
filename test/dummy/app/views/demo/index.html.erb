@@ -1,0 +1,24 @@
+<article>
+<h1>HI <%=@user.email%></h1>
+<section style="background-color:white;">
+<p>The simple actions below are set up for demo purposes, but the trigger for an action could be any method on a ruby model.</p>
+<p>EX: You might have a Chimpaction that moves a subscriber to your "Power Buyer List" when <br> <code>User.purchases.count > 5</code></p>
+</section>
+<section>
+<p>Clicking this link will set your status to 'registered', which will fire the Chimpaction to add you to the "Chimpactions Registered Users"<br>
+  <a href="/demo/upgrade">UPGRADE MY ACCOUNT </a>
+</p>
+</section>
+<section>
+<p>
+  Clicking this link will set your status to 'cancelled', which will fire the Chimpaction to removeyou to the "ChimpActions Mailing List"<br>
+  <a href="/demo/remove">CANCEL MY ACCOUNT!</a>
+</p>
+</section>
+<h1>the user model :</h1>
+<%=debug(@user.attributes)%>
+</article>
+
+<article style="background-color:white;font-size:12px;">
+  <%= render :partial => '/demo/yml'%>
+  </article>

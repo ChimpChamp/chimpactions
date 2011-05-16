@@ -6,25 +6,36 @@ module Chimpactions
     attr_accessor :action
     #The Chimpactions::List object to excute the action on.
     attr_accessor :list
-    
     attr_accessor :whenn
     attr_accessor :is
     attr_accessor :value 
     
     # @params [String,String,Subscriber,String] {:action, :list, :method, :comparitor, :value}Subscriber method name, = || != || < || >, Subscriber Object, value to test against
     def initialize(params)
-      validate_params(params)
       params.each_pair do |key,val|
-        self.send(key.to_s << "=", val)
+      #  puts "#{key} => #{val}"
+        self.send(key.to_s.dup << "=", val)
+      end
+    end
+    
+    def execute(subscriber)
+      if perform?(subscriber)
+        puts "*** PERFORMING : subscriber.#{action}(\"#{list}\")"
+        eval "subscriber.#{action}(\"#{list}\")"
       end
     end
     
     # Check the Object attributes against the specified logic.
     # @param [String,String,Subscriber,String] Subscriber method name, = || != || < || >, Subscriber Object, value to test against
     def perform?(subscriber)
-      is = '==' if is == '='
+      puts "#{is}"
+      if  is.eql?("=")
+        is = '==' 
+      end
+      puts "#{is}"
       value = cast_value(self.value)
       value = "\"#{value}\"" if value.class.name == "String"
+      puts "*** CHECKING : subscriber.#{whenn} #{is} #{value}"
       eval "subscriber.#{whenn} #{is} #{value}"
     end
     
@@ -54,23 +65,6 @@ module Chimpactions
       end
     end
     
-    # Ensures initialization parameters are valid.
-    # @param [Hash]
-    def validate_params(p)
-     registered_class = Chimpactions.registered_class.new
-     if  !registered_class.respond_to?(p[:action].to_sym)
-       error = ":action #{@registered_class} to respond to #{p[:action]}"
-     elsif !registered_class.respond_to?(p[:whenn].to_sym)
-       error = ":whenn #{registered_class} to respond to #{p[:whenn]}"
-     end
-     list_object = Chimpactions.list(p[:list]) rescue false 
-     if !list_object
-       error = ":list could not find your list! (you passed #{p[:list]})"
-     else
-       p[:list] = list_object
-     end
-    raise ArgumentError, "Chimpactions::Action expects #{error}", caller if !error.nil?
-    end
     
   end #Action
 end # module

@@ -1,15 +1,3 @@
-<section>
-<article>
-<h1 class="v-large logo">chimpActions</h1>
-<p>Simple MailChimp list management... </p>
-<ul class="nav inlined">
-  <li><%= link_to "HOME", root_url %></li>
-  <li>DEMO</li>
-  <li><%= link_to "DOCUMENTATION", "doc/index.html" %></li>
-  <li><%= link_to "TESTCOVERAGE", "coverage/index.html" %></li>
-</ul>
-</article>
-</section>
 <ul class="checklist">
 <% if Chimpactions::Setup.ok? %>
 <li> <h1 class="v-large">The Chimpactions gem is loaded.</h1> </li>
@@ -19,16 +7,22 @@
       <span><%= debug(@registered[0])%></span>
 </li>
 </ul>
-<section>
+<!-- <section>
   <article>
     <%=render :partial => 'api_change'%>
+  </article>
+</section> -->
+
+<section>
+  <article>
+    <h1 class="v-large">Will perform these actions  :</h1>
+    <%= render :partial => 'actions_list'%>
   </article>
 </section>
 
   <section>
     <article>
-      <h1 class="v-large">Your lists are here now....</h1>
-      <h1>I will show them :</h1>
+      <h1 class="v-large">Here are the lists in your Mailchimp Account :</h1>
     </article>
   </section>
   

@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   def index
     @lists = Chimpactions.available_lists
     @registered = Chimpactions.registered_classes
+    @actions = Chimpactions.actions
   end
   
   def change_accounts

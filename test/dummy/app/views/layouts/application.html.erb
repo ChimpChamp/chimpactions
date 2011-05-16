@@ -10,6 +10,23 @@
 <div id='wrap'>
   <div id="main">
     <header class="where-am-i"> YOU ARE AT: <%= controller.controller_name -%> : <%= controller.action_name -%> </header>
+<section>
+<article>
+<h1 class="v-large logo">chimpActions</h1>
+<p>Simple MailChimp list management... </p>
+<ul class="nav inlined">
+  <li><%= link_to "HOME", root_url %></li>
+  <li><%= link_to "DEMO", "/demo" %></li>
+  <li><%= link_to "DOCUMENTATION", "doc/index.html" %></li>
+  <li><%= link_to "TESTCOVERAGE", "coverage/index.html" %></li>
+</ul>
+</article>
+<% if flash[:message]%>
+<article>
+ <h1 class="v-large logo"> <%= flash[:message]%> </h1>
+</article>
+<%end%>
+</section>
     <%= yield %>
   </div>
 </div>

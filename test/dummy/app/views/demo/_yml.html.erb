@@ -1,4 +1,6 @@
-mailchimp_api_key: aefe9dae400a886bf13ac7eee94e7528-us2
+<h1> The configuration file for this install:</h1>
+<pre>
+mailchimp_api_key: xxxxxxxxxxxxxxx-xxxxxxxx-xxx-xxxx
 # Mappings of YOUR MailChimp Merge Variables
 # => This list should include ANY merge variables throughout your MailChimp
 #    account from any and all lists.
@@ -13,19 +15,20 @@ merge_map:
   EMAIL: email
   FAV_COL: favorite_color
 mailchimp_ses_key: 0987654321
+local_model: User
 default_double_optin: false #default false Require the user to reply to the MailChimp system before adding to list.
 default_send_welcome: true #default true Have MailChimp send the "Welcome" email for the list immediately.
 default_email_type:  "html"
 actions:
-  -
-    action: :move_to
-    list: "Chimpactions Registered Users"
-    whenn: "status" 
-    is: '='
-    value: 'registered'
-  -
-    action: :remove_from
-    list: "ChimpActions Mailing List"
-    whenn: "status" 
-    is: '='
-    value: 'cancelled'
+  action: "move_to"
+  list: "Chimpactions Registered Users"
+  whenn: "status" 
+  is: '='
+  value: 'registered'
+
+  action: "delete_from"
+  list: "ChimpActions Mailing List"
+  whenn: "status" 
+  is: '='
+  value: 'cancelled'
+</pre>

@@ -18,6 +18,10 @@ module Chimpactions
 # 
 # Unsubscribe the given email address from the list
     
+  def chimpactions
+    Chimpactions.actions.each{|action| action.execute(self)}
+  end
+    
     # Add the Subscriber to the specified list.
     # @param [String, Fixnum, Chimpactions::List] list
     def add_to(list, opts={})
