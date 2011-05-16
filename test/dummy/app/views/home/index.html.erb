@@ -4,7 +4,7 @@
 
 <% end %>
 <li><h1 class="v-large">Chimpactions is loaded on your model:</h1>
-      <span><%= debug(@registered)%></span>
+      <span><%= debug(Kernel.const_get(@registered))%></span>
 </li>
 </ul>
 <!-- <section>

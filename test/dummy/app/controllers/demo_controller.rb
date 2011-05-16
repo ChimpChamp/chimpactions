@@ -3,7 +3,7 @@ class DemoController < ApplicationController
   
   def index
     @lists = Chimpactions.available_lists
-    @registered = Chimpactions.registered_classes
+    @registered = "User"
     @user = current_user
   end
   
