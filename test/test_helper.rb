@@ -8,6 +8,8 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
 require 'shoulda'
 require 'factory_girl'
+# Load all the factories
+Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each { |f| require f }
 
 ActionMailer::Base.delivery_method = :test
 ActionMailer::Base.perform_deliveries = true

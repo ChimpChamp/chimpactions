@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.6"
+gem "rails", "3.0.7"
 gem "capybara", ">= 0.4.0"
 gem "sqlite3"
 gem "gibbon", ">= 0.1.5"

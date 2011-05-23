@@ -28,14 +28,14 @@ module Chimpactions
     # Check the Object attributes against the specified logic.
     # @param [String,String,Subscriber,String] Subscriber method name, = || != || < || >, Subscriber Object, value to test against
     def perform?(subscriber)
-      puts "#{is}"
+    #  puts "#{is}"
       if  is.eql?("=")
         is = '==' 
       end
-      puts "#{is}"
+     # puts "#{is}"
       value = cast_value(self.value)
       value = "\"#{value}\"" if value.class.name == "String"
-      puts "*** CHECKING : subscriber.#{whenn} #{is} #{value}"
+    #  puts "*** CHECKING : subscriber.#{whenn} #{is} #{value}"
       eval "subscriber.#{whenn} #{is} #{value}"
     end
     
