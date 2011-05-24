@@ -12,10 +12,21 @@ module Chimpactions
     
     # @params [String,String,Subscriber,String] {:action, :list, :method, :comparitor, :value}Subscriber method name, = || != || < || >, Subscriber Object, value to test against
     def initialize(params)
-      params.each_pair do |key,val|
-      #  puts "#{key} => #{val}"
-        self.send(key.to_s.dup << "=", val)
+      if params.class.name == "Hash"
+        params.each_pair do |key,val|
+          self.send(key.to_s.dup << "=", val)
+        end
+      else
+        ini_ar(params)
       end
+    end
+    
+    def ini_ar(ar)
+        attribs = %W[action list whenn is value]
+        attribs.each do |attrib|
+          val = ar.send(attrib)
+          self.send(attrib.to_s.dup << "=", val)
+        end
     end
     
     def execute(subscriber)

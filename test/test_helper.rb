@@ -39,7 +39,7 @@ def mock_setup
     'EMAIL' => 'email',
     'FAV_COL' => 'favorite_color'
   },
-  'local_model' => :user
+  'local_model' => 'User'
 })
 
   @raw_data = Factory.build(:raw_lists)
@@ -56,7 +56,7 @@ Chimpactions.setup(
     'FAV_COL' => 'favorite_color'
   },
   'mailchimp_ses_key' => "0987654321",
-  'local_model' => :user
+  'local_model' => 'User'
 })
 Chimpactions.change_account('aefe9dae400a886bf13ac7eee94e7528-us2')
 end

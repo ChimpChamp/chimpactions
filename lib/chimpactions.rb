@@ -1,10 +1,12 @@
 # Holds MailChimp account level information
 # Should set up wit an initializer.
+#require 'active_support' 
 module Chimpactions
   # ruby wrapper gem for the MailChimp API
   # https://github.com/amro/gibbon
-
+#extend ActiveSupport::Autoload 
   require 'gibbon'
+  require 'chimpactions/engine'# if defined?(Rails)
   autoload :List, 'chimpactions/list'
   autoload :Subscriber, 'chimpactions/subscriber'
   autoload :Utility, 'chimpactions/utility'
@@ -12,7 +14,7 @@ module Chimpactions
    require 'chimpactions/exception'
   autoload :Setup, 'chimpactions/setup' 
   autoload :ListNotifier, 'chimpactions/notifier' 
-  
+
   # Obersver pattern untility class attribute.
   mattr_accessor :observers
   @@observers = []
@@ -109,12 +111,18 @@ module Chimpactions
   # a fresh initializer with configuration options.
   def self.setup(config)
    # puts config
+    self.for(config['local_model'])
     self.mailchimp_api_key = config['mailchimp_api_key']
     self.merge_map = config['merge_map']
     self.mailchimp_ses_key = config['mailchimp_ses_key']
     self.socket = Gibbon::API.new(self.mailchimp_api_key)
-    if config['actions']
+    case config['action_store']
+    when :yml
       config['actions'].each do |action|
+        self.actions << Chimpactions::Action.new(action)
+      end
+    when :active_record
+      Chimpaction.all.each do |action|
         self.actions << Chimpactions::Action.new(action)
       end
     end

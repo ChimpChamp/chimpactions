@@ -15,14 +15,14 @@ module Chimpactions
         @prev_migration_nr.to_s
       end
 
-      def copy_migrations
-        migration_template "add_chimpactions.rb", "db/migrate/add_chimpactions.rb"
+      desc "Creates a Chimpactions initializer and copy locale files to your application."
+      def copy_config_yml
+        template "chimpactions.yml", "config/initializers/chimpactions.yml"
       end
 
-      desc "Creates a Chimpactions initializer and copy locale files to your application."
-      def copy_initializer
-        template "chimpactions_initializer.rb", "config/initializers/chimpactions.rb"
-        template "chimpactions.yml", "config/initializers/chimpactions.yml"
+      desc "Add the Chimpactions migration to  Rails db/migrate"
+      def copy_migrations
+        migration_template "add_chimpactions.rb", "db/migrate/add_chimpactions.rb"
       end
 
       def show_readme
