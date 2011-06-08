@@ -10,6 +10,7 @@ class ActionTest < ActiveSupport::TestCase
       @user = User.new(:email => "subscriber@notanemail.com", :first_name => "FirstName", :last_name =>"LastName", :favorite_color => "red")
       User.any_instance.stubs(:is_great).returns(true)
       User.any_instance.stubs(:is_clean).returns(false)
+      User.any_instance.stubs(:is_a_method).returns(true)
       @action1 = Chimpactions::Action.new({:action => "add_to", :list => Chimpactions.available_lists[0], :whenn => "is_great", :is => '=', :value => true})
       @action2 = Chimpactions::Action.new({:action => "move_to", :list => Chimpactions.available_lists[1], :whenn => "is_clean", :is => '=', :value => true})
       
@@ -22,6 +23,11 @@ class ActionTest < ActiveSupport::TestCase
       assert_equal TrueClass, @action1.cast_value("true").class
     end
     
+    should "take a Chimpaction ActiveRecord object and create a Chimpactions::Action" do 
+      ar = Chimpaction.new({:action => "add_to", :list => Chimpactions.available_lists[0], :whenn => "is_a_method", :is => '=', :value => true})
+      action = Chimpactions::Action.new(ar)
+      assert_instance_of(Chimpactions::Action, action)
+    end
     
     should "take a required action" do
       assert_equal true, @action1.perform?(@user)

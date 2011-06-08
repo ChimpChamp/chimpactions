@@ -16,7 +16,7 @@ module Chimpactions
         params.each_pair do |key,val|
           self.send(key.to_s.dup << "=", val)
         end
-      else
+      elsif params.class.name == "Chimpaction"
         ini_ar(params)
       end
     end
@@ -68,14 +68,6 @@ module Chimpactions
         val
       end
     end
-    
-    # Allows this action to be performed on mutiple Subscriber objects.
-    def perform_on(*subscribers)
-      subscribers.flatten!.each do |s|
-        puts s
-      end
-    end
-    
     
   end #Action
 end # module

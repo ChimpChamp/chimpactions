@@ -10,6 +10,7 @@ require "chimpactions"
     end
   end
 
+# ActiveRecord 'wrapper' for Chimpactions::Action to provide non-yml peristence & customization
  class Chimpaction < ActiveRecord::Base
   validates_with ResponseValidator
  end

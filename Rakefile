@@ -28,6 +28,13 @@ Rake::TestTask.new(:units) do |t|
   t.verbose = false
 end
 
+Rake::TestTask.new(:functionals) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/integration/*_test.rb'
+  t.verbose = false
+end
+
 task :default => :test
 
 Rake::RDocTask.new(:rdoc) do |rdoc|
