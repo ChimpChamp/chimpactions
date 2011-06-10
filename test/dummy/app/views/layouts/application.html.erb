@@ -21,11 +21,6 @@
   <li><%= link_to "TESTCOVERAGE", "coverage/index.html" %></li>
 </ul>
 </article>
-<% if flash[:message]%>
-<article>
- <h1 class="v-large logo"> <%= flash[:message]%> </h1>
-</article>
-<%end%>
 </section>
     <%= yield %>
   </div>

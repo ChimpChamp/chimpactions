@@ -30,6 +30,10 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 require 'mocha'
 
+def action_hash
+  @action_hash = {:list => 'Chimpactions',:action => 'move_to',:whenn => 'status',:is => '=',:value => 'new'}
+end
+
 def mock_setup
   Chimpactions.setup(
   {'mailchimp_api_key' => "notreallanapikey",

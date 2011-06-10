@@ -25,6 +25,18 @@ module Chimpactions
         migration_template "add_chimpactions.rb", "db/migrate/add_chimpactions.rb"
       end
 
+      def copy_views
+        record do |m|
+          # Views. 
+          m.directory "app/views/chimpactions"
+          m.file "views/chimpactions/index.html.erb", "app/views/chimpactions/index.html.erb"
+          m.file "views/chimpactions/edit.html.erb", "app/views/chimpactions/edit.html.erb"
+          m.file "views/chimpactions/new.html.erb", "app/views/chimpactions/new.html.erb"
+          m.file "views/chimpactions/_form.html.erb", "app/views/chimpactions/_form.html.erb"
+          m.file "views/chimpactions/_errors.html.erb", "app/views/chimpactions/_errors.html.erb"
+        end
+    end
+      
       def show_readme
         readme "README" if behavior == :invoke
       end

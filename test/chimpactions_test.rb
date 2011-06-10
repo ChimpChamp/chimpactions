@@ -25,7 +25,7 @@ class ChimpactionsTest < ActiveSupport::TestCase
     end
     
     should "return the right Stats object for a List" do
-      assert_equal Chimpactions.available_lists[0].stats.data, {"member_count"=>0, "unsubscribe_count"=>0, "cleaned_count"=>0, "member_count_since_send"=>0, "unsubscribe_count_since_send"=>0, "cleaned_count_since_send"=>0, "campaign_count"=>0, "grouping_count"=>0, "group_count"=>0, "merge_var_count"=>2, "avg_sub_rate"=>nil, "avg_unsub_rate"=>nil, "target_sub_rate"=>nil, "open_rate"=>nil, "click_rate"=>nil}  
+      assert_equal Chimpactions.available_lists[0].stats.data.keys, {"member_count"=>0, "unsubscribe_count"=>0, "cleaned_count"=>0, "member_count_since_send"=>0, "unsubscribe_count_since_send"=>0, "cleaned_count_since_send"=>0, "campaign_count"=>0, "grouping_count"=>0, "group_count"=>0, "merge_var_count"=>2, "avg_sub_rate"=>nil, "avg_unsub_rate"=>nil, "target_sub_rate"=>nil, "open_rate"=>nil, "click_rate"=>nil}.keys  
     end
     
     should "return the list is a List object is passed" do
