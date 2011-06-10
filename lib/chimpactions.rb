@@ -1,6 +1,7 @@
 # Holds MailChimp account level information
 # Should set up wit an initializer.
-#require 'active_support' 
+#require 'active_support'
+require "railtie"
 module Chimpactions
   # ruby wrapper gem for the MailChimp API
   # https://github.com/amro/gibbon
