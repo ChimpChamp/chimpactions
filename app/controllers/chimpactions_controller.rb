@@ -5,17 +5,6 @@ class ChimpactionsController < ApplicationController
     @actions = Chimpaction.all
   end
   
-    # GET /chimpactions/1
-  # GET /chimpactions/1.xml
-  def show
-    @chimpaction = Chimpaction.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @chimpaction }
-    end
-  end
-  
   # GET /chimpactions/new
   # GET /chimpactions/new.xml
   def new

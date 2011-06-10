@@ -6,6 +6,7 @@ class ActionTest < ActiveSupport::TestCase
 
   context "Taking actions" do
     setup do
+      action_hash
       mock_setup
       @user = User.new(:email => "subscriber@notanemail.com", :first_name => "FirstName", :last_name =>"LastName", :favorite_color => "red")
       User.any_instance.stubs(:is_great).returns(true)
@@ -36,6 +37,18 @@ class ActionTest < ActiveSupport::TestCase
     should "not take an action that's not met" do
       assert_equal false, @action2.perform?(@user)
     end
+    
+    should "excute properly" do
+      real_setup
+      ar = Chimpaction.new(@action_hash)
+      ar.whenn = 'favorite_color'
+      ar.value = 'red'
+      ar.list = "Chimpactions Registered Users"
+      action = Chimpactions::Action.new(ar)
+      user = User.new(:email => "subscriber@notanemail.com", :first_name => "FirstName", :last_name =>"LastName", :favorite_color => "red")
+      assert_equal action.execute(user), true
+    end
+    
   end #context
   
 end # class

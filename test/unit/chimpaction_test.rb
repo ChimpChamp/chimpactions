@@ -24,6 +24,5 @@ class ChimpactionTest < ActiveSupport::TestCase
       assert_equal ca.save, true
     end
     
-    
   end # context 
 end #Class
