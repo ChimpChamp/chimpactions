@@ -2,7 +2,8 @@ require "chimpactions"
 
   class ResponseValidator < ActiveModel::Validator
     def validate(record)
-       k =  Kernel.const_get(Chimpactions::registered_class.to_s.capitalize).new
+      # k =  Kernel.const_get(Chimpactions::registered_class.name.to_s.capitalize).new
+       k = Chimpactions.registered_class
       if k.respond_to?(record.action) != true
         record.errors[:action] << "- '#{record.action}' is not a method of #{k.class.name} !"
       end

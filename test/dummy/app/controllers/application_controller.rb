@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
       session[:user_id] = @current_user.id if @current_user
       @current_user
     end
+    
+    def require_admin
+      puts "****** ADMIN REQUIRED **********"
+    end
 end

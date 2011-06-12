@@ -1,21 +1,26 @@
 <style>
-.ca_action_form {border:1px solid grey;padding:7px;padding-bottom:25px;width:790px;font-size:.75em;}
-.ca_action_form fieldset {background-color:inherit;width:770px;}
+.ca_action_form {padding-bottom:25px;width:350px;}
+.ca_action_form fieldset {background-color:inherit;padding:0px;margin:0px;}
 .ca_action_form fieldset legend {background-color:inherit;}
-.ca_action_form * {float:none;}
+.ca_action_form * {float:none;font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   12px!important;
+  line-height: 14px!important;}
 .ca_action_form label {padding:0 4px;}
 .ca_action_form div {display:inline;}
 .ca_action_form .field_with_errors input {border:1px solid red;}
+.ca_action_form ol {list-style:none;padding:14px;margin: 0px auto;max-width:315px;}
+.ca_action_form ol li{padding:4px;}
+.ca_action_form .bold {font-weight:bold;}
 </style>
 <%= form_for @chimpaction, :html => {:class => 'ca_action_form'} do |c| %>
 <%= render "chimpactions/errors", :target => @chimpaction %>
 <fieldset>
-  <legend>For <%= Chimpactions.registered_class.name.pluralize %>:</legend>
-    <%= select(:chimpaction, :action, %w(add_to move_to remove_from).map {|l| [l.gsub('_',' ').titleize , l]}) -%>
-    <%= collection_select(:chimpaction, :list, Chimpactions.available_lists, :name, :name)%>
-    <%= c.label :when %><%= c.text_field :whenn %> 
-    <%= select(:chimpaction, :is, %w(= < >)) %> 
-    <%= c.text_field :value %><%= c.label '(Value)' %>
-    <%= submit_tag "submit"%>
+  <ol>
+    <li><%= c.label :when, {:class => 'bold'} %> <%= Chimpactions.registered_class_name%>.<%= c.text_field :whenn, {:size => '15'} %> </li>
+    <li><%= select(:chimpaction, :is, %w(= < >)) %> <%= c.text_field :value %><%= c.label '(Value)' %></li>
+    <li><%= c.label "THEN", {:class => 'bold'}%></li>
+    <li><%= select(:chimpaction, :action, %w(add_to move_to remove_from).map {|l| [l.gsub('_',' ').titleize , l]}) -%></li>
+    <li><%= collection_select(:chimpaction, :list, Chimpactions.available_lists, :name, :name)%></li>
+    <li><%= submit_tag "submit"%></li>
 </fieldset>
 <% end %>

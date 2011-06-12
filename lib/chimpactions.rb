@@ -1,7 +1,7 @@
 # Holds MailChimp account level information
 # Should set up wit an initializer.
 #require 'active_support'
-require "railtie"
+require "railtie" if defined?(Rails)
 module Chimpactions
   # ruby wrapper gem for the MailChimp API
   # https://github.com/amro/gibbon
@@ -12,7 +12,7 @@ module Chimpactions
   autoload :Subscriber, 'chimpactions/subscriber'
   autoload :Utility, 'chimpactions/utility'
   autoload :Action, 'chimpactions/action'
-   require 'chimpactions/exception'
+  require 'chimpactions/exception'
   autoload :Setup, 'chimpactions/setup' 
   autoload :ListNotifier, 'chimpactions/notifier' 
 
@@ -82,17 +82,15 @@ module Chimpactions
   # - Must respond_to? 'email'
   # - For methods defined in the Chimpactions merge_map
   # -- can to respond_to? each method
-  # -- if it doesn not, Chimpactions will not send the merge variable or value.
-  def self.for(klass)
-    klass = Kernel.const_get(klass.to_s.capitalize)
-    raise Chimpactions::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.new.respond_to?(:email)
-    klass.class_eval <<-INC
-      include Chimpactions::Subscriber
-    INC
+  # -- if it does not, Chimpactions will not send the merge variable or value.
+  def self.for(klass_name)
+    klass =  Kernel.const_get(klass_name.to_s.capitalize).new
+    raise Chimpactions::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.respond_to?(:email)
+    klass.class.send(:include, Chimpactions::Subscriber)
     @@registered_classes << klass if !@@registered_classes.include? klass
   end
-  
-  # Change the MailChimp used by the system.
+
+  # # Change the MailChimp used by the system.
   # Notifies all list objects and reloads the available lists from the new account.
   # @param [String] A new API key
   def self.change_account(new_api_key)
@@ -108,10 +106,19 @@ module Chimpactions
     self.registered_classes[0]
   end
   
+  
+  def self.registered_class_name
+    self.registered_classes[0].class.name
+  end
   # Default setup for Chimpactions. Run rails generate chimpactions_install to create
   # a fresh initializer with configuration options.
   def self.setup(config)
    # puts config
+    if config['mailchimp_api_key'] == 'your_mailchimp_api_key' || config['local_model'] == 'YourLocalModel'
+      raise Chimpactions::SetupError.new("You must customize initializers/chimpactions.yml.")
+    end
+ #   klass = Kernel.cont_get(config['local_model'].to_s.capitalize)
+#    @@registered_classes << klass if !@@registered_classes.include? klass
     self.for(config['local_model'])
     self.mailchimp_api_key = config['mailchimp_api_key']
     self.merge_map = config['merge_map']
@@ -134,12 +141,23 @@ module Chimpactions
   #TODO: What if there are an unmanageable (50+) number of lists? Paginate?
   def self.available_lists(force=false)
     if force
-      @available_lists = socket.lists['data'].map{|raw_list| Chimpactions::List.new(raw_list)}
+      @available_lists = load_lists.map{|raw_list| Chimpactions::List.new(raw_list)}
     else
-      @available_lists ||= socket.lists['data'].map{|raw_list| Chimpactions::List.new(raw_list)}
+      @available_lists ||= load_lists.map{|raw_list| Chimpactions::List.new(raw_list)}
     end
   end
   
+  # Query the Mailchimp server for lists in this account
+  # # @return [Hash] Data for the query
+  def self.load_lists
+    # send the query
+    response = socket.lists
+    if !response['error']
+      response['data']
+    else
+      raise MailChimpError.new("#{response['error']} (#{response['code']})")
+    end
+  end
   
   # Searches the MailChimp list hash by id, web_id, name
   # @param [String, Fixnum, Chimpactions::List] list

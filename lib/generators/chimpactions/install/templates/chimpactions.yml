@@ -1,18 +1,39 @@
 mailchimp_api_key: your_mailchimp_api_key
+mailchimp_ses_key: your_mailchimp_ses_key
 # Mappings of YOUR MailChimp Merge Variables
 # => This list should include ANY merge variables throughout your MailChimp
 #    account from any and all lists.
-# => Chimpactions will fail gracefully (i.e. not try to send) any varibles
+# => Chimpactions will fail gracefully (i.e. not try to send) on any varibles
 #    either not set by your model, or not in the particular list.
 # => If your model does not respond_to?('your_models_attribute_or_method')
 #    the merge variable will be skipped (not sent).
 # @format :: MAILCHIMP_MERGE_VAR: 'model_attribute_or_method'
 merge_map:
-  EMAIL: email
   FNAME: first_name
   LNAME: last_name
-mailchimp_ses_key: 0987654321
-local_model: User
+  EMAIL: email
+  FAV_COL: favorite_color
+# The local model to target for mix-in of the Chimpactions gem.
+# This effectively makes the defined model as a Chimpactions::Subscriber
+local_model: YourLocalModel
 default_double_optin: false #default false Require the user to reply to the MailChimp system before adding to list.
 default_send_welcome: true #default true Have MailChimp send the "Welcome" email for the list immediately.
-default_email_type:  "html"
+default_email_type:  html # 'nuff said... html ot text
+# Storage method for Chimpactions persistence
+# => :active_record OR :yml
+# :active_record => ActiveRecord DB model (see migration)
+# :yml => manually defined in this file with :
+# actions:
+#   -
+#     action: :move_to
+#     list: "A MailChimp List Name"
+#     whenn: "your_method_or_attribute_1" 
+#     is: '='
+#     value: 'the_value_1'
+#   -
+#     action: :remove_from
+#     list: "Another MailChimp List Name"
+#     whenn: "your_method_or_attribute_2" 
+#     is: '='
+#     value: 'the_value_2'  
+action_store: :active_record

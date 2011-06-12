@@ -1,12 +1,6 @@
-
 ===============================================================================
+Chimpactions is almost ready...
 
-You must do the following manually:
-
-  1. Do this.
-
-  2. Do another thing
-
-  3. Do something else
-
+  - Edit initializers/chimpactions.yml accordingly
+  - you can then visit the admin interface at http:yourapp/chimpactions
 ===============================================================================

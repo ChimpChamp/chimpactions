@@ -1,8 +1,9 @@
 class ChimpactionsController < ApplicationController
   def index
     @all_actions  = Chimpactions.actions
-    @registered  = Chimpactions.registered_class
+    @registered  = Chimpactions.registered_class_name
     @actions = Chimpaction.all
+    @lists = Chimpactions.available_lists
   end
   
   # GET /chimpactions/new

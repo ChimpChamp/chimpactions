@@ -1,1 +1,1 @@
-Chimpactions.setup(YAML.load_file("config/initializers/chimpactions.yml"))
+ChimpactionsController.send(:before_filter, 'require_admin')

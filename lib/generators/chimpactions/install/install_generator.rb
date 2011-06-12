@@ -17,7 +17,7 @@ module Chimpactions
 
       desc "Creates a Chimpactions initializer and copy locale files to your application."
       def copy_config_yml
-        template "chimpactions.yml", "config/initializers/chimpactions.yml"
+        copy_file "chimpactions.yml", "config/initializers/chimpactions.yml"
       end
 
       desc "Add the Chimpactions migration to  Rails db/migrate"
@@ -26,16 +26,13 @@ module Chimpactions
       end
 
       def copy_views
-        record do |m|
-          # Views. 
-          m.directory "app/views/chimpactions"
-          m.file "views/chimpactions/index.html.erb", "app/views/chimpactions/index.html.erb"
-          m.file "views/chimpactions/edit.html.erb", "app/views/chimpactions/edit.html.erb"
-          m.file "views/chimpactions/new.html.erb", "app/views/chimpactions/new.html.erb"
-          m.file "views/chimpactions/_form.html.erb", "app/views/chimpactions/_form.html.erb"
-          m.file "views/chimpactions/_errors.html.erb", "app/views/chimpactions/_errors.html.erb"
-        end
-    end
+        # Views template 
+          copy_file "views/chimpactions/index.html.erb", "app/views/chimpactions/index.html.erb"
+          copy_file "views/chimpactions/edit.html.erb", "app/views/chimpactions/edit.html.erb"
+          copy_file "views/chimpactions/new.html.erb", "app/views/chimpactions/new.html.erb"
+          copy_file "views/chimpactions/_form.html.erb", "app/views/chimpactions/_form.html.erb"
+          copy_file "views/chimpactions/_errors.html.erb", "app/views/chimpactions/_errors.html.erb"
+      end
       
       def show_readme
         readme "README" if behavior == :invoke
