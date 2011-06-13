@@ -1,0 +1,81 @@
+h1. Chimpactions
+
+Easily move contacts between MailChimp lists in your Rails 3 application.
+
+h2. Requirements
+
+A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
+
+h2. Installation
+
+# *_Gemfile_* -> <code>gem "chimpactions", "~> 0.0.1"</code>
+# <code>rails generate chimpactions:install</code>
+# _Edit initializers/chimpactions.yml_ with your information.
+
+Generates: 
+* initializers/chimpactions.yml config file
+* chimpactions ActiveRecord migration
+* chimpactions view files for administrative interface
+
+h2. Configuration
+
+_See installed initializers/chimpactions.yml for configuration options_
+
+h2. Usage
+
+h3. What's available
+
+Once defined (in chimpactions.yml) the local Rails model inherits the following methods from the Chimpactions gem :
+* add_to(List)
+* move_to(List)
+* remove_from(List)
+
+h3. A Chimpaction :
+
+*WHENN (A model method/attribute) IS (<,>,=) VALUE, ACTION (Chimpactions method) LIST (One of your MailChimp Lists)*
+
+ex.
+
+ 'When a user has more than 50 posts, move them to the Power Poster list'
+
+*_in chimpactions.yml_*
+<pre><code>
+  action:
+    -
+    action: :move_to,
+    list: Power Posters,
+    whenn: posts.count,
+    is: >,
+    value: 50
+    -
+ </code>
+</pre>
+
+*_for ActiveRecord store_* 
+ The admin interface should be a straightforward representation. 
+
+h3. Administrative Interface
+
+Direct your browser to http://yourapp.chimpactions for a simple CRUD to build and manage Actions.
+Available values are set in the forms where applicable, validations will tell you if a value won't work.
+
+h3. Manual access
+
+You can move subscribers around arbitrarily as well:
+
+<code>User.remove_from("Power Posters") </code>
+
+
+h2. License
+
+This project released under the MIT-LICENSE.
+
+h2. Thanks
+
+p. Made possible by the generous support of the "MailChimp Integration Fund":http://www.mailchimp.com/about/integration-fund/ .
+
+h2. Copyrights
+
+(c) circuitllc 2011 - Released under the MIT license.
+
+* "gibbon":http://rubygems.org/gems/gibbon/ *_The uber-simple MailChimp API wrapper_*
