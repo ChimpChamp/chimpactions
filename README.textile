@@ -84,8 +84,30 @@ h3. Manual access
 
 You can move subscribers around arbitrarily as well:
 
-<code>User.remove_from("Power Posters") </code>
+<pre>
+  <code>
+    user = User.find(123)
+    user.remove_from("Power Posters") 
+  </code>
+</pre>
 
+h3. Chimpactions Module
+
+All your lists with a ton of info: 
+<pre>
+  <code>
+    @lists = Chimpactions.available_lists
+    ...view
+    <%= var_dump(@lists) ->
+  </code>
+</pre>
+
+Calling the MailChimp API directly: 
+
+Direct access to the "gibbon":http://rubygems.org/gems/gibbon/ socket :
+<pre>
+  <code>api_result = Chimpactions.socket.campaigns({:start => 0, :limit => 100})</code>
+</pre>
 
 h2. License
 
@@ -99,4 +121,4 @@ h2. Copyrights
 
 (c) circuitllc 2011 - Released under the MIT license.
 
-* "gibbon":http://rubygems.org/gems/gibbon/ *_The uber-simple MailChimp API wrapper_*
+
