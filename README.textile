@@ -60,8 +60,7 @@ ex.
  'When a user has more than 50 posts, move them to the Power Poster list'
 
 *_in chimpactions.yml_*
-<pre><code>
-  action:
+<pre><code>  action:
     -
     action: :move_to,
     list: Power Posters,
@@ -83,16 +82,14 @@ h3. Manual access
 
 You can move subscribers around arbitrarily as well:
 
-<pre><code>
-user = User.find(123)
+<pre><code>user = User.find(123)
 user.remove_from("Power Posters") 
 </code></pre>
 
 h3. Chimpactions Module
 
 All your lists with a ton of info: 
-<pre><code>
-@lists = Chimpactions.available_lists
+<pre><code>@lists = Chimpactions.available_lists
 ...view
 <%= var_dump(@lists) ->
 </code></pre>
@@ -100,9 +97,12 @@ All your lists with a ton of info:
 Calling the MailChimp API directly: 
 
 Direct access to the "gibbon":http://rubygems.org/gems/gibbon/ socket :
-<pre><code>
-api_result = Chimpactions.socket.campaigns({:start => 0, :limit => 100})
+<pre><code>api_result = Chimpactions.socket.campaigns({:start => 0, :limit => 100})
 </code></pre>
+
+h2. TODO
+
+* implement VCR for tests so we don't have to use a real API key
 
 h2. License
 
