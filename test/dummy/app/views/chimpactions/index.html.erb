@@ -18,5 +18,5 @@
 </section>
 <section>
   <h1>Your MailChimp lists: </h1>
-  <%= render :partial => 'list', :collection => @lists%>
+  <%= render :partial => 'list', :collection => @lists if @lists.count > 0%>
 </section>

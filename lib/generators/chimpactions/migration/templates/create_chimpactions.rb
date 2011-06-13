@@ -1,4 +1,4 @@
-class AddChimpactions < ActiveRecord::Migration
+class CreateChimpactions < ActiveRecord::Migration
   def self.up
     create_table :chimpactions, :force => true do |t|
       t.text :action

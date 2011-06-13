@@ -72,17 +72,22 @@
     
   
     
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Rails::Generators::Migration</dd>
+      
+    
   
   
   
-    <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/generators/install_generator.rb</dd>
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/generators/chimpactions/install/install_generator.rb</dd>
   
 </dl>
 <div class="clear"></div>
 
 
 
+  
   
 
   
@@ -96,7 +101,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#copy_initializer-instance_method" title="#copy_initializer (instance method)">- (Object) <strong>copy_initializer</strong> </a>
+      <a href="#copy_config_yml-instance_method" title="#copy_config_yml (instance method)">- (Object) <strong>copy_config_yml</strong> </a>
     
 
     
@@ -140,15 +145,16 @@
 
 
   
+  
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
     
     
       <div class="method_details first">
-  <p class="signature first" id="copy_initializer-instance_method">
+  <p class="signature first" id="copy_config_yml-instance_method">
   
-    - (<tt>Object</tt>) <strong>copy_initializer</strong> 
+    - (<tt>Object</tt>) <strong>copy_config_yml</strong> 
   
 
   
@@ -158,17 +164,15 @@
       <pre class="lines">
 
 
-7
-8
-9
-10</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generators/install_generator.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/generators/chimpactions/install/install_generator.rb', line 10</span>
 
-<span class='kw'>def</span> <span class='id copy_initializer'>copy_initializer</span>
-  <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chimpactions_initializer.rb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config/initializers/chimpactions.rb</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chimpactions.yml</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config/initializers/chimpactions.yml</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>def</span> <span class='id copy_config_yml'>copy_config_yml</span>
+  <span class='id copy_file'>copy_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chimpactions.yml</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config/initializers/chimpactions.yml</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -188,12 +192,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generators/install_generator.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/generators/chimpactions/install/install_generator.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id show_readme'>show_readme</span>
   <span class='id readme'>readme</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>README</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id behavior'>behavior</span> <span class='op'>==</span> <span class='symbol'>:invoke</span>
@@ -208,7 +212,7 @@
 </div>
     
     <div id="footer">
-  Generated on Wed May  4 17:11:41 2011 by 
+  Generated on Mon Jun 13 07:00:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.9.2).
 </div>

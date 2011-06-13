@@ -8,9 +8,9 @@ A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
 
 h2. Installation
 
-<code>gem "chimpactions"</code>
-
-<code>rails generate chimpactions:install</code>
+# *_Gemfile_* -> <code>gem "chimpactions", "~> 0.0.1"</code>
+# <code>rails generate chimpactions:install</code>
+# _Edit initializers/chimpactions.yml_ with your information.
 
 Generates: 
 * initializers/chimpactions.yml config file
@@ -38,8 +38,8 @@ ex.
 
  'When a user has more than 50 posts, move them to the Power Poster list'
 
- .yml
- <code>
+*_in chimpactions.yml_*
+<pre><code>
   action:
     -
     action: :move_to,
@@ -49,8 +49,9 @@ ex.
     value: 50
     -
  </code>
- OR 
- 
+</pre>
+
+*_for ActiveRecord store_* 
  The admin interface should be a straightforward representation. 
 
 h3. Administrative Interface

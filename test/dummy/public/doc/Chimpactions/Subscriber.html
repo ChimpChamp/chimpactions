@@ -144,6 +144,56 @@ Add the Subscriber to the specified list.
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#chimpactions-instance_method" title="#chimpactions (instance method)">- (Object) <strong>chimpactions</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+listSubscribe(string apikey, string id, string email_address, array
+merge_vars, string email_type, bool double_optin, bool update_existing,
+bool replace_interests, bool send_welcome).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#collect_merge_vars-instance_method" title="#collect_merge_vars (instance method)">- (Hash) <strong>collect_merge_vars</strong>(merge_hash) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Calls the specified method/attribute on the mix-in target.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#move_to-instance_method" title="#move_to (instance method)">- (Object) <strong>move_to</strong>(list) </a>
     
 
@@ -263,6 +313,54 @@ Check if this Subscriber is &#8216;subscribed&#8217; to the list.
 </li>
 
       
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#sync_to_chimp-instance_method" title="#sync_to_chimp (instance method)">- (boolean) <strong>sync_to_chimp</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sync this Subscriber&#8217;s info to the MailChimp list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#validate_list-instance_method" title="#validate_list (instance method)">- (Object) <strong>validate_list</strong>(list) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Wrapper for Chimpactions module list method.
+</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -317,12 +415,12 @@ The Chimpactions mergemap
       <pre class="lines">
 
 
-80
-81
-82</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id merge_vars'>merge_vars</span><span class='lparen'>(</span><span class='id hash'>hash</span> <span class='op'>=</span> <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id merge_map'>merge_map</span><span class='rparen'>)</span>
   <span class='id collect_merge_vars'>collect_merge_vars</span><span class='lparen'>(</span><span class='id hash'>hash</span><span class='rparen'>)</span>
@@ -378,16 +476,16 @@ Add the Subscriber to the specified list.
       <pre class="lines">
 
 
-23
-24
-25
-26
 27
 28
-29</pre>
+29
+30
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id add_to'>add_to</span><span class='lparen'>(</span><span class='id list'>list</span><span class='comma'>,</span> <span class='id opts'>opts</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
@@ -395,6 +493,142 @@ Add the Subscriber to the specified list.
     <span class='symbol'>:merge_vars</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id merge_vars'>merge_vars</span><span class='comma'>,</span> <span class='symbol'>:send_welcome</span> <span class='op'>=&gt;</span> <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id default_send_welcome'>default_send_welcome</span><span class='comma'>,</span>
     <span class='symbol'>:double_optin</span> <span class='op'>=&gt;</span> <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id default_double_optin'>default_double_optin</span><span class='comma'>,</span>
     <span class='symbol'>:update_existing</span> <span class='op'>=&gt;</span> <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id default_update_existing'>default_update_existing</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span> <span class='id opts'>opts</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="chimpactions-instance_method">
+  
+    - (<tt>Object</tt>) <strong>chimpactions</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+listSubscribe(string apikey, string id, string email_address, array
+merge_vars, string email_type, bool double_optin, bool update_existing,
+bool replace_interests, bool send_welcome)
+</p>
+<p>
+Subscribe the provided email to a list.
+</p>
+<p>
+listUnsubscribe(string apikey, string id, string email_address, boolean
+delete_member, boolean send_goodbye, boolean send_notify)
+</p>
+<p>
+Unsubscribe the given email address from the list
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id chimpactions'>chimpactions</span>
+  <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id actions'>actions</span><span class='period'>.</span><span class='id each'>each</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id action'>action</span><span class='op'>|</span> <span class='id action'>action</span><span class='period'>.</span><span class='id execute'>execute</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="collect_merge_vars-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>collect_merge_vars</strong>(merge_hash)  <span class="extras">(private)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Calls the specified method/attribute on the mix-in target
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>{'MAILCHIMP_MERGE_VAR'</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><h1>> &#8216;model_attribute_or_method&#8217;}</h1>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id collect_merge_vars'>collect_merge_vars</span><span class='lparen'>(</span><span class='id merge_hash'>merge_hash</span><span class='rparen'>)</span>
+  <span class='id merge_vars'>merge_vars</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id merge_hash'>merge_hash</span><span class='period'>.</span><span class='id each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='comma'>,</span><span class='id val'>val</span><span class='op'>|</span>
+   <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id val'>val</span><span class='rparen'>)</span>
+     <span class='id method_object'>method_object</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id method'>method</span><span class='lparen'>(</span><span class='id val'>val</span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='rparen'>)</span> 
+     <span class='id merge_vars'>merge_vars</span><span class='lbracket'>[</span><span class='id key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id method_object'>method_object</span><span class='period'>.</span><span class='id call'>call</span>
+   <span class='kw'>end</span>
+ <span class='kw'>end</span>
+ <span class='id merge_vars'>merge_vars</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -441,10 +675,6 @@ List
       <pre class="lines">
 
 
-33
-34
-35
-36
 37
 38
 39
@@ -453,10 +683,14 @@ List
 42
 43
 44
-45</pre>
+45
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id move_to'>move_to</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
@@ -528,14 +762,14 @@ Check if this Subscriber is on the specified list.
       <pre class="lines">
 
 
-64
-65
-66
-67
-68</pre>
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id on_list?'>on_list?</span><span class='lparen'>(</span><span class='id list'>list</span><span class='comma'>,</span> <span class='id opts'>opts</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
@@ -586,13 +820,13 @@ Remove the Subscriber from the specified list.
       <pre class="lines">
 
 
-49
-50
-51
-52</pre>
+53
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id remove_from'>remove_from</span><span class='lparen'>(</span><span class='id list'>list</span><span class='comma'>,</span> <span class='id opts'>opts</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
@@ -643,13 +877,13 @@ this Subscriber
       <pre class="lines">
 
 
-56
-57
-58
-59</pre>
+60
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id send_response_email'>send_response_email</span><span class='lparen'>(</span><span class='id list'>list</span><span class='comma'>,</span> <span class='id title'>title</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
@@ -712,19 +946,127 @@ Check if this Subscriber is &#8216;subscribed&#8217; to the list.
       <pre class="lines">
 
 
-73
-74
-75
-76
-77</pre>
+77
+78
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id subscribed?'>subscribed?</span><span class='lparen'>(</span><span class='id list'>list</span><span class='comma'>,</span><span class='id opts'>opts</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id list'>list</span> <span class='op'>=</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
   <span class='id answer'>answer</span> <span class='op'>=</span> <span class='id list'>list</span><span class='period'>.</span><span class='id socket'>socket</span><span class='period'>.</span><span class='id listMemberInfo'>listMemberInfo</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id list'>list</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:email_address</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id email'>email</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span> <span class='id opts'>opts</span><span class='rparen'>)</span>
-  <span class='id answer'>answer</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>data</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>status</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>subscribed</span><span class='tstring_end'>'</span></span>
+  <span class='id answer'>answer</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>success</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='int'>1</span> <span class='op'>&amp;&amp;</span> <span class='id answer'>answer</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>data</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>status</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>subscribed</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="sync_to_chimp-instance_method">
+  
+    - (<tt>boolean</tt>) <strong>sync_to_chimp</strong>  <span class="extras">(private)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sync this Subscriber&#8217;s info to the MailChimp list.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+<b>true</b> or <b>false</b>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id sync_to_chimp'>sync_to_chimp</span>
+  <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id available_lists'>available_lists</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id l'>l</span><span class='op'>|</span>
+    <span class='id add_to'>add_to</span><span class='lparen'>(</span><span class='id l'>l</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="validate_list-instance_method">
+  
+    - (<tt>Object</tt>) <strong>validate_list</strong>(list)  <span class="extras">(private)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Wrapper for Chimpactions module list method
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Chimpactions.list(list)</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions/subscriber.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id validate_list'>validate_list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
+  <span class='const'>Chimpactions</span><span class='period'>.</span><span class='id list'>list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -736,7 +1078,7 @@ Check if this Subscriber is &#8216;subscribed&#8217; to the list.
 </div>
     
     <div id="footer">
-  Generated on Wed May  4 17:11:41 2011 by 
+  Generated on Mon Jun 13 07:00:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.9.2).
 </div>

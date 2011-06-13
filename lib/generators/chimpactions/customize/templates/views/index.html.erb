@@ -1,0 +1,22 @@
+<section>
+  <% %w(notice warning error).each do |msg| %>
+    <% unless flash[msg.to_sym].blank? %>
+    <div class='message <%=msg-%>'><p><%=flash[msg.to_sym]-%></p></div>
+    <% end %>
+<% end %>
+<h1>Current Chimpactions  : </h1>
+<ul>
+<% @actions.each do |action|%>
+  <li> When a <%= @registered %> <%= action.whenn %> <%= action.is %> <%= action.value %> => <%= @registered%>.<%= action.action %> (<%= action.list %>) 
+  <%= link_to 'Edit', edit_chimpaction_path(action) %> ||
+   <%= link_to 'Destroy', chimpaction_path(action.id), :confirm => 'Are you sure?', :method => :delete %></li>
+<%end%>
+</ul>
+</section>
+<section>
+  <h1> <%= link_to "Add New Chimpaction", new_chimpaction_path %> </h1>
+</section>
+<section>
+  <h1>Your MailChimp lists: </h1>
+  <%= render :partial => 'list', :collection => @lists if @lists.count > 0%>
+</section>

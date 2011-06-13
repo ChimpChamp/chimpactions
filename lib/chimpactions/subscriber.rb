@@ -77,7 +77,7 @@ module Chimpactions
     def subscribed?(list,opts={})
       list = validate_list(list)
       answer = list.socket.listMemberInfo({:id => list.id, :email_address => self.email}.merge opts)
-      answer['data'][0]['status'] == 'subscribed'
+      answer['success'] == 1 && answer['data'][0]['status'] == 'subscribed'
     end
     
     # @param [Hash] hash The Chimpactions mergemap 

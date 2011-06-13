@@ -1,0 +1,1 @@
+ChimpactionsController.send(:before_filter, 'require_admin')

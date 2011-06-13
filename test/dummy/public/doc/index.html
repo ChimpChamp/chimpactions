@@ -42,47 +42,66 @@
     <iframe id="search_frame"></iframe>
     
     <div id="content"><div id='filecontents'><h1>Chimpactions</h1>
-<p>Easily move contacts between MailChimp lists.</p>
-<h2>Installation</h2>
-<p><code>gem install chimpactions</code></p>
-<p><code>rake chimpactions:install</code></p>
+<p>Easily move contacts between MailChimp lists in your Rails 3 application.</p>
 <h2>Requirements</h2>
 <p>A MailChimp account and <a href="http://admin.mailchimp.com/account/api"><span class="caps">API</span> key</a>.</p>
+<h2>Installation</h2>
+<ol>
+	<li><strong><em>Gemfile</em></strong> &#8594; <code>gem "chimpactions", "~&gt; 0.0.1"</code></li>
+	<li><code>rails generate chimpactions:install</code></li>
+	<li><em>Edit initializers/chimpactions.yml</em> with your information.</li>
+</ol>
+<p>Generates:</p>
+<ul>
+	<li>initializers/chimpactions.yml config file</li>
+	<li>chimpactions ActiveRecord migration</li>
+	<li>chimpactions view files for administrative interface</li>
+</ul>
+<h2>Configuration</h2>
+<p><em>See installed initializers/chimpactions.yml for configuration options</em></p>
 <h2>Usage</h2>
-<pre class="code"> <span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>chimpactions</span><span class='tstring_end'>'</span></span> </pre>
-<h3>Your MailChimp Lists</h3>
-<h3>Adding a subscriber to a list</h3>
-<h3>Moving a subscriber between lists</h3>
-<h3>Defining an Action</h3>
-<h2>Rails</h2>
+<h3>What&#8217;s available</h3>
+<p>Once defined (in chimpactions.yml) the local Rails model inherits the following methods from the Chimpactions gem :</p>
+<ul>
+	<li>add_to(List)</li>
+	<li>move_to(List)</li>
+	<li>remove_from(List)</li>
+</ul>
+<h3>A Chimpaction :</h3>
+<p><strong><span class="caps">WHENN</span> (A model method/attribute) IS (&lt;,&gt;,=) <span class="caps">VALUE</span>, <span class="caps">ACTION</span> (Chimpactions method) <span class="caps">LIST</span> (One of your MailChimp Lists)</strong></p>
+<p>ex.</p>
+&#8216;When a user has more than 50 posts, move them to the Power Poster list&#8217;
+<p><strong><em>in chimpactions.yml</em></strong>
+<pre class="code">
+  action:
+    -
+    action: :move_to,
+    list: Power Posters,
+    whenn: posts.count,
+    is: &gt;,
+    value: 50
+    -
+ </pre></p>
+<p><strong><em>for ActiveRecord store</em></strong> 
+ The admin interface should be a straightforward representation.</p>
+<h3>Administrative Interface</h3>
+<p>Direct your browser to http://yourapp.chimpactions for a simple <span class="caps">CRUD</span> to build and manage Actions.
+Available values are set in the forms where applicable, validations will tell you if a value won&#8217;t work.</p>
+<h3>Manual access</h3>
+<p>You can move subscribers around arbitrarily as well:</p>
+<p><code>User.remove_from("Power Posters") </code></p>
 <h2>License</h2>
+<p>This project released under the <span class="caps">MIT</span>-<span class="caps">LICENSE</span>.</p>
 <h2>Thanks</h2>
 <p>Made possible by the generous support of the <a href="http://www.mailchimp.com/about/integration-fund/">MailChimp Integration Fund</a> .</p>
 <h2>Copyrights</h2>
+<p>&#169; circuitllc 2011 &#8211; Released under the <span class="caps">MIT</span> license.</p>
 <ul>
-	<li><a href="http://rubygems.org/gems/gibbon/">gibbon</a> <strong><em>The uber-simple MailChimp <span class="caps">API</span> wrapper</em></strong>
-__________</li>
-</ul>
-<ul>
-	<li>Here</li>
-	<li>is a list</li>
-	<li>of things</li>
-</ul>
-<p>This project rocks and uses <span class="caps">MIT</span>-<span class="caps">LICENSE</span>.</p>
-<p><code>
-lists = ChimpActions.available_lists  
-</code></p>
-One spaced text.
-
-Two spaced text.
-<p>a paragraph</p>
-<p><em>italics</em></p>
-<p><del>strkethrough</del></p>
-<p><strong><span class="caps">BOLDE</span></strong></p>
-<p><a href="http://circuitllc.com">You suck</a></p></div></div>
+	<li><a href="http://rubygems.org/gems/gibbon/">gibbon</a> <strong><em>The uber-simple MailChimp <span class="caps">API</span> wrapper</em></strong></li>
+</ul></div></div>
     
     <div id="footer">
-  Generated on Wed May  4 17:11:41 2011 by 
+  Generated on Mon Jun 13 07:00:57 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.9.2).
 </div>

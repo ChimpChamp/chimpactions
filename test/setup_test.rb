@@ -43,31 +43,29 @@ class SetupTest < ActiveSupport::TestCase
   
   context"With default initializer" do
     setup do
-      Chimpactions.setup({'mailchimp_api_key' => "your_mailchimp_api_key",
+      @setup_hash = 
+        {'mailchimp_api_key' => "your_mailchimp_api_key",
         'mailchimp_ses_key' => "your_mailchimp_ses_key",
         'merge_map' => {
           'FNAME'=> 'first_name',
           'LNAME' => 'last_name',
           'EMAIL' => 'email',
           'FAV_COL' => 'favorite_color'},
-        'local_model' => 'User'})
+        'local_model' => 'YourLocalModel'}
     end
 
     should "setup initializer" do
+      @setup_hash['mailchimp_api_key'] = '1234567890'
+      @setup_hash['local_model'] = "User"
+      Chimpactions.setup(@setup_hash)
       setup = Chimpactions::Setup.ensure_initialization
       assert_equal Chimpactions::Setup.message, "Chimpactions::Setup.initialize"
     end
   
     should "cause initialization failure with defaults" do
-      setup = Chimpactions::Setup.ensure_initialization
-      assert_equal Chimpactions::Setup.ok?, false
+      assert_raise(Chimpactions::SetupError) { Chimpactions.setup(@setup_hash) }
     end
   
-    should "create Setup.errors with defaults" do
-      setup = Chimpactions::Setup.ensure_initialization
-      assert_equal Chimpactions::Setup.ok?, false
-      assert_equal Chimpactions::Setup.errors[:api_key], "Is not set!"
-    end
   end
 
 end

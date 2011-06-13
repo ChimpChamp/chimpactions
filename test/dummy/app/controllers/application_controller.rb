@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
     end
     
     def require_admin
-      puts "****** ADMIN REQUIRED **********"
+      
     end
 end

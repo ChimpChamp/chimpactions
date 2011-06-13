@@ -18,16 +18,16 @@ default_send_welcome: true #default true Have MailChimp send the "Welcome" email
 default_email_type:  "html"
 local_model: "User"
 action_store: :active_record 
-actions:
-  -
-    action: :move_to
-    list: "Chimpactions Registered Users"
-    whenn: "status" 
-    is: '='
-    value: 'registered'
-  -
-    action: :remove_from
-    list: "ChimpActions Mailing List"
-    whenn: "status" 
-    is: '='
-    value: 'cancelled'
+# actions:
+#   -
+#     action: :move_to
+#     list: "Chimpactions Registered Users"
+#     whenn: "status" 
+#     is: '='
+#     value: 'registered'
+#   -
+#     action: :remove_from
+#     list: "ChimpActions Mailing List"
+#     whenn: "status" 
+#     is: '='
+#     value: 'cancelled'
