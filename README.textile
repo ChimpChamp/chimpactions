@@ -8,14 +8,35 @@ A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
 
 h2. Installation
 
+h3. Base
+
 # *_Gemfile_* -> <code>gem "chimpactions", "~> 0.0.1"</code>
 # <code>rails generate chimpactions:install</code>
 # _Edit initializers/chimpactions.yml_ with your information.
 
 Generates: 
 * initializers/chimpactions.yml config file
+
+h3. ActiveRecord store
+
+<code>rails generate chimpactions:migration </code>
+
+<code> rake db:migrate </code>
+
+Generates:
 * chimpactions ActiveRecord migration
+
+h3. Customizing Admin
+
+Chimpactions provides a basic scaffold for managing ActiveRecord Actions @ http:yourapp/chimpactions.
+To override the gem views :
+
+<code>rails generate chimpactions:customize </code>
+
+Generates: 
+
 * chimpactions view files for administrative interface
+* yourapp/app/views/chimpactions
 
 h2. Configuration
 
