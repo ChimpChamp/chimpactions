@@ -759,6 +759,11 @@ Unit Tests:
     - 
     - 1
     - 
+    - 1
+    - 0
+    - 0
+    - 
+    - 
     - 
     - 
     - 
@@ -785,12 +790,12 @@ Unit Tests:
     - 
     - 
     - 1
-    - 10
+    - 9
     - 
     - 
     - 
     - 1
-    - 5
+    - 6
     - 
     - 
     - 
@@ -810,6 +815,8 @@ Unit Tests:
     - 
     - 0
     - 0
+    - 0
+    - 
     - 
     - 
     - 1
@@ -891,6 +898,15 @@ Unit Tests:
     - 1
     - 1
     - 
+    - 1
+    - 
+    - 
+    - 1
+    - 1
+    - 
+    - 
+    - 
+    - 
     - 
     /Users/pb/p/chimpactions/lib/chimpactions/engine.rb: 
     - 1
@@ -905,6 +921,8 @@ Unit Tests:
     - 1
     - 1
     - 1
+    - 
+    - 0
     - 
     - 
     - 
@@ -1020,6 +1038,8 @@ Unit Tests:
     - 1
     - 
     - 
+    - 1
+    - 33
     - 
     - 
     - 
@@ -1027,6 +1047,9 @@ Unit Tests:
     - 
     - 
     - 
+    - 
+    - 
+    - 1
     - 1
     - 0
     - 
@@ -1392,7 +1415,7 @@ Unit Tests:
     - 
     - 
     - 
-  :created_at: 2011-06-13 06:48:50.699544 -07:00
+  :created_at: 2011-06-14 17:03:05.984025 -07:00
 /Users/pb/.rvm/gems/ruby-1.9.2-p180@rails3/gems/rake-0.8.7/lib/rake/rake_test_loader.rb chimpactions_test.rb: 
   :original_result: 
     /Users/pb/p/chimpactions/lib/chimpactions.rb: 

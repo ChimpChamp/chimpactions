@@ -1,7 +1,7 @@
 ===============================================================================
 Chimpactions is almost ready...
 
-  - Edit initializers/chimpactions.yml accordingly
+  - Edit config/chimpactions.yml accordingly
   - To use ActiveRecord data store for Actions:
     - rails generate chimpactions:migration
   - you can then visit the admin interface at http:yourapp/chimpactions

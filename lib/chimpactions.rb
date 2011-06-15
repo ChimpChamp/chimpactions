@@ -77,6 +77,11 @@ module Chimpactions
   # the gibbon API wrapper object for communication with MailChimp servers
   mattr_accessor :socket
   
+  def initialize(*atts)
+    super(*atts)
+    puts "**** CA INITIALIZED! ************"
+  end
+  
   # Assign a local class to the Chimpactions module.
   # @param [Object] The local object to inherit Chimpactions::Subscriber methods.
   # - Must respond_to? 'email'
@@ -86,7 +91,7 @@ module Chimpactions
   def self.for(klass_name)
     klass =  Kernel.const_get(klass_name.to_s.capitalize).new
     raise Chimpactions::SetupError.new("The #{klass.name} class MUST at least respond to 'email' !") if !klass.respond_to?(:email)
-    klass.class.send(:include, Chimpactions::Subscriber)
+    Kernel.const_get(klass_name.to_s.capitalize).send(:include, Chimpactions::Subscriber)
     @@registered_classes << klass if !@@registered_classes.include? klass
   end
 
@@ -126,8 +131,10 @@ module Chimpactions
     self.socket = Gibbon::API.new(self.mailchimp_api_key)
     case config['action_store']
     when :yml
-      config['actions'].each do |action|
-        self.actions << Chimpactions::Action.new(action)
+      if !config['actions'].blank?
+        config['actions'].each do |action|
+          self.actions << Chimpactions::Action.new(action)
+        end
       end
     when :active_record
       Chimpaction.all.each do |action|

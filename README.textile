@@ -8,18 +8,43 @@ A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
 
 h2. Installation
 
+h3. Base
+
 # *_Gemfile_* -> <code>gem "chimpactions", "~> 0.0.1"</code>
 # <code>rails generate chimpactions:install</code>
-# _Edit initializers/chimpactions.yml_ with your information.
+# _Edit config/chimpactions.yml_ with your information.
+# add <code>include Chimpactions::Subscriber</code> to your model.
+# add <code>after_save :chimpactions </code> (if that's what you want) to your model.
+
+The YourModel.chimpactions method fires the actions to move subscribers as specified.
 
 Generates: 
-* initializers/chimpactions.yml config file
+* config/chimpactions.yml config file
+
+h3. ActiveRecord store
+
+<code>rails generate chimpactions:migration </code>
+
+<code> rake db:migrate </code>
+
+Generates:
 * chimpactions ActiveRecord migration
+
+h3. Customizing Admin
+
+Chimpactions provides a basic scaffold for managing ActiveRecord Actions @ http:yourapp/chimpactions.
+To override the gem views :
+
+<code>rails generate chimpactions:customize </code>
+
+Generates: 
+
 * chimpactions view files for administrative interface
+* yourapp/app/views/chimpactions
 
 h2. Configuration
 
-_See installed initializers/chimpactions.yml for configuration options_
+_See installed config/chimpactions.yml for configuration options_
 
 h2. Usage
 
@@ -39,8 +64,7 @@ ex.
  'When a user has more than 50 posts, move them to the Power Poster list'
 
 *_in chimpactions.yml_*
-<pre><code>
-  action:
+<pre><code>  action:
     -
     action: :move_to,
     list: Power Posters,
@@ -48,8 +72,7 @@ ex.
     is: >,
     value: 50
     -
- </code>
-</pre>
+</code></pre>
 
 *_for ActiveRecord store_* 
  The admin interface should be a straightforward representation. 
@@ -63,8 +86,28 @@ h3. Manual access
 
 You can move subscribers around arbitrarily as well:
 
-<code>User.remove_from("Power Posters") </code>
+<pre><code>user = User.find(123)
+user.remove_from("Power Posters") 
+</code></pre>
 
+h3. Chimpactions Module
+
+All your lists with a ton of info: 
+<pre><code>@lists = Chimpactions.available_lists
+...view
+<%= var_dump(@lists) ->
+</code></pre>
+
+Calling the MailChimp API directly: 
+
+Direct access to the "gibbon":http://rubygems.org/gems/gibbon/ socket :
+<pre><code>api_result = Chimpactions.socket.campaigns({:start => 0, :limit => 100})
+</code></pre>
+
+h2. TODO
+
+* implement VCR for tests so we don't have to use a real API key
+* get loading don't so we don't have to add <code>include Chimpactions::Subscriber</code> in the model
 
 h2. License
 
@@ -76,6 +119,6 @@ p. Made possible by the generous support of the "MailChimp Integration Fund":htt
 
 h2. Copyrights
 
-(c) circuitllc 2011 - Released under the MIT license.
+(c) circuitllc & "imgenius":http://imgeni.us 2011 - Released under the MIT license.
 
-* "gibbon":http://rubygems.org/gems/gibbon/ *_The uber-simple MailChimp API wrapper_*
+

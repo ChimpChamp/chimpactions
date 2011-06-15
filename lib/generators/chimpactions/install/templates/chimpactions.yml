@@ -36,4 +36,4 @@ default_email_type:  html # 'nuff said... html ot text
 #     whenn: "your_method_or_attribute_2" 
 #     is: '='
 #     value: 'the_value_2'  
-action_store: :active_record
+action_store: :yml

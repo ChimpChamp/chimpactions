@@ -47,7 +47,7 @@ class DemoController < ApplicationController
   end
   
   def upgrade
-    current_user.status = "registered"
+    current_user.status = "upgraded"
     current_user.save
     flash[:message] = "Your status has been upgraded!"
     redirect_to '/demo'
