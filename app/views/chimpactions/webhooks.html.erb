@@ -1,0 +1,26 @@
+<style>
+.ca_list {list-style:none;padding:0px;}
+</style>
+<div style="font-size:1.2em; color:green;"><%= flash[:notice] if flash[:notice] %></div>
+<ul class="ca_list">
+  <% @lists.each do |list|%>
+  <li><%= list.name%> ( ID : <%= list.id %> )
+    <% if list.webhook? == false %> 
+      <%=link_to "Add Webhook", {:action => 'add_webhook', :id => list.web_id }%>
+    <% else %>
+      <%=link_to "REMOVE Webhook", {:action => 'delete_webhook', :id => list.web_id }%>
+    <%end%>
+  </li>
+  <%end%>
+</ul>
+
+<div style="margin-top:25px;"> Remember !  : in order to do something here, your <%= Chimpactions.registered_class_name %> class must define :
+  <pre> 
+    ...
+    def receive_webhook(post_from_mailchimp)
+      // do something with the MailChimp POST data here
+    end
+    ...
+  </pre>
+  
+</div>

@@ -114,7 +114,7 @@ module Chimpactions
         end
         merge_vars
        end
-  
+       
       # Wrapper for Chimpactions module list method
       # @see Chimpactions.list(list)
       def validate_list(list)

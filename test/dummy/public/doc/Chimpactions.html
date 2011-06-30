@@ -463,6 +463,39 @@ Default setup for Chimpactions.
       
     </ul>
   
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Chimpactions) <strong>initialize</strong>(*atts) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Chimpactions.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
 
 
 
@@ -553,16 +586,16 @@ ChimpActions::List objects available in your account.
       <pre class="lines">
 
 
-142
-143
-144
-145
-146
-147
-148</pre>
+149
+150
+151
+152
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id available_lists'>available_lists</span><span class='lparen'>(</span><span class='id force'>force</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id force'>force</span>
@@ -622,15 +655,15 @@ new API key
       <pre class="lines">
 
 
-96
-97
-98
-99
-100
-101</pre>
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id change_account'>change_account</span><span class='lparen'>(</span><span class='id new_api_key'>new_api_key</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id mailchimp_api_key'>mailchimp_api_key</span> <span class='op'>=</span> <span class='id new_api_key'>new_api_key</span>
@@ -705,12 +738,12 @@ Chimpactions::List object
       <pre class="lines">
 
 
-187
-188
-189</pre>
+194
+195
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find_list'>find_list</span><span class='lparen'>(</span><span class='id params'>params</span><span class='rparen'>)</span>
   <span class='id available_lists'>available_lists</span><span class='period'>.</span><span class='id find'>find</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id list'>list</span><span class='op'>|</span> <span class='id list'>list</span><span class='period'>.</span><span class='id method'>method</span><span class='lparen'>(</span><span class='symbol'>:params</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id call'>call</span> <span class='op'>==</span> <span class='id params'>params</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
@@ -792,20 +825,20 @@ local object to inherit Chimpactions::Subscriber methods.
       <pre class="lines">
 
 
-86
-87
-88
-89
-90
-91</pre>
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='kw'>for</span><span class='lparen'>(</span><span class='id klass_name'>klass_name</span><span class='rparen'>)</span>
   <span class='id klass'>klass</span> <span class='op'>=</span>  <span class='const'>Kernel</span><span class='period'>.</span><span class='id const_get'>const_get</span><span class='lparen'>(</span><span class='id klass_name'>klass_name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id capitalize'>capitalize</span><span class='rparen'>)</span><span class='period'>.</span><span class='id new'>new</span>
   <span class='id raise'>raise</span> <span class='const'>Chimpactions</span><span class='op'>::</span><span class='const'>SetupError</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The </span><span class='embexpr_beg'>#{</span><span class='id klass'>klass</span><span class='period'>.</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> class MUST at least respond to 'email' !</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id klass'>klass</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:email</span><span class='rparen'>)</span>
-  <span class='id klass'>klass</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='symbol'>:include</span><span class='comma'>,</span> <span class='const'>Chimpactions</span><span class='op'>::</span><span class='const'>Subscriber</span><span class='rparen'>)</span>
+  <span class='const'>Kernel</span><span class='period'>.</span><span class='id const_get'>const_get</span><span class='lparen'>(</span><span class='id klass_name'>klass_name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id capitalize'>capitalize</span><span class='rparen'>)</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='symbol'>:include</span><span class='comma'>,</span> <span class='const'>Chimpactions</span><span class='op'>::</span><span class='const'>Subscriber</span><span class='rparen'>)</span>
   <span class='cvar'>@@registered_classes</span> <span class='op'>&lt;&lt;</span> <span class='id klass'>klass</span> <span class='kw'>if</span> <span class='op'>!</span><span class='cvar'>@@registered_classes</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id klass'>klass</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -884,13 +917,6 @@ The Chimpactions List object
       <pre class="lines">
 
 
-165
-166
-167
-168
-169
-170
-171
 172
 173
 174
@@ -901,10 +927,17 @@ The Chimpactions List object
 179
 180
 181
-182</pre>
+182
+183
+184
+185
+186
+187
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 172</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id list'>list</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id list'>list</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id name'>name</span>
@@ -972,12 +1005,12 @@ Lists available in your MailChimp account, keyed by id
       <pre class="lines">
 
 
-199
-200
-201</pre>
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id list_ids'>list_ids</span>
   <span class='id available_lists'>available_lists</span><span class='period'>.</span><span class='id sort'>sort</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id a'>a</span><span class='comma'>,</span><span class='id b'>b</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id id'>id</span> <span class='op'>&lt;=&gt;</span> <span class='id b'>b</span><span class='period'>.</span><span class='id id'>id</span><span class='rbrace'>}</span>
@@ -1030,12 +1063,12 @@ Lists available in your MailChimp account, keyed by name.
       <pre class="lines">
 
 
-193
-194
-195</pre>
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id lists_by_name'>lists_by_name</span>
    <span class='id available_lists'>available_lists</span><span class='period'>.</span><span class='id sort'>sort</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id a'>a</span><span class='comma'>,</span><span class='id b'>b</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>&lt;=&gt;</span> <span class='id b'>b</span><span class='period'>.</span><span class='id name'>name</span><span class='rbrace'>}</span>
@@ -1070,18 +1103,18 @@ for the query
       <pre class="lines">
 
 
-152
-153
-154
-155
-156
-157
-158
 159
-160</pre>
+160
+161
+162
+163
+164
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id load_lists'>load_lists</span>
   <span class='comment'># send the query
@@ -1177,12 +1210,12 @@ The registered class
       <pre class="lines">
 
 
-105
-106
-107</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id registered_class'>registered_class</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id registered_classes'>registered_classes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -1205,12 +1238,12 @@ The registered class
       <pre class="lines">
 
 
-110
-111
-112</pre>
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id registered_class_name'>registered_class_name</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id registered_classes'>registered_classes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id name'>name</span>
@@ -1245,11 +1278,6 @@ create a fresh initializer with configuration options.
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
 120
 121
 122
@@ -1267,10 +1295,17 @@ create a fresh initializer with configuration options.
 134
 135
 136
-137</pre>
+137
+138
+139
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id setup'>setup</span><span class='lparen'>(</span><span class='id config'>config</span><span class='rparen'>)</span>
  <span class='comment'># puts config
@@ -1286,8 +1321,10 @@ create a fresh initializer with configuration options.
   <span class='kw'>self</span><span class='period'>.</span><span class='id socket'>socket</span> <span class='op'>=</span> <span class='const'>Gibbon</span><span class='op'>::</span><span class='const'>API</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id mailchimp_api_key'>mailchimp_api_key</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>action_store</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
   <span class='kw'>when</span> <span class='symbol'>:yml</span>
-    <span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>actions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id action'>action</span><span class='op'>|</span>
-      <span class='kw'>self</span><span class='period'>.</span><span class='id actions'>actions</span> <span class='op'>&lt;&lt;</span> <span class='const'>Chimpactions</span><span class='op'>::</span><span class='const'>Action</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id action'>action</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='op'>!</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>actions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id blank?'>blank?</span>
+      <span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>actions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id action'>action</span><span class='op'>|</span>
+        <span class='kw'>self</span><span class='period'>.</span><span class='id actions'>actions</span> <span class='op'>&lt;&lt;</span> <span class='const'>Chimpactions</span><span class='op'>::</span><span class='const'>Action</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id action'>action</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>when</span> <span class='symbol'>:active_record</span>
     <span class='const'>Chimpaction</span><span class='period'>.</span><span class='id all'>all</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id action'>action</span><span class='op'>|</span>
@@ -1302,10 +1339,57 @@ create a fresh initializer with configuration options.
     
   </div>
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Chimpactions (module)">Chimpactions</a></span></tt>) <strong>initialize</strong>(*atts) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Chimpactions
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chimpactions.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id atts'>atts</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>*</span><span class='id atts'>atts</span><span class='rparen'>)</span>
+  <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>**** CA INITIALIZED! ************</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
     
     <div id="footer">
-  Generated on Mon Jun 13 07:00:57 2011 by 
+  Generated on Tue Jun 14 17:28:07 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.9.2).
 </div>

@@ -31,6 +31,7 @@ module Chimpactions
     
     def execute(subscriber)
       if perform?(subscriber)
+        puts "subscriber.#{action}(\"#{list}\")"
         eval "subscriber.#{action}(\"#{list}\")"
       end
     end

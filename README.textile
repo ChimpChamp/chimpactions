@@ -104,6 +104,16 @@ Direct access to the "gibbon":http://rubygems.org/gems/gibbon/ socket :
 <pre><code>api_result = Chimpactions.socket.campaigns({:start => 0, :limit => 100})
 </code></pre>
 
+
+h3. Webhooks
+
+To register your application with your MailChimp List direct your browser to : http://yourapp/chimpactions/webhooks
+
+The links next to each list will add/delete the webhook http://yourapp/chimpactions/receive to that list.
+
+You must handle the post itself in <pre><code> receive_webhook(mc_post_data) </code> </pre> in your mix-in model for it have an effect.
+
+
 h2. TODO
 
 * implement VCR for tests so we don't have to use a real API key

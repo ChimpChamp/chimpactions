@@ -65,4 +65,59 @@ class ChimpactionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def webhooks
+    @lists = Chimpactions.available_lists
+  end
+  
+  def add_webhook
+    list = Chimpactions.list(params[:id])
+     if list.set_webhook :url => 'http://www.postbin.org/1iwea1s'#webhook_url
+       flash[:notice] = "Added Webhook!"
+     end
+       redirect_to '/chimpactions/webhooks'
+  end
+  
+  def delete_webhook
+    list = Chimpactions.list(params[:id])
+     if list.remove_webhook :url => 'http://www.postbin.org/1iwea1s' #webhook_url
+       flash[:notice] = "Removed Webhook!"
+     end
+       redirect_to '/chimpactions/webhooks'
+  end
+  
+  def receive
+    if params['data']
+      subscriber = Chimpactions.registered_class.find_by_email(params['data']['email'])
+      subscriber.receive_webhook(params) if subscriber.respond_to?(:receive_webhook)
+    end
+      render :nothing => true
+  end
+# data[email] = 'federico@mailchimp.com'
+# 
+# data[email_type] = 'html'
+# 
+# data[id]  = 'da1b07ac4c'
+# 
+# data[ip_opt]='69.12.4.2'
+# 
+# data[list_id]='45a650bc63'
+# 
+# data[merges][EMAIL]='federico@mailchimp.com'
+# 
+# data[merges][FNAME] ='Federico'
+# 
+# data[merges][IP] ='127.0.0.1'
+# 
+# data[merges][LNAME]='Holgado'
+# 
+# data[merges][SIGNUP]=''
+# 
+# data[web_id]='234305517'
+# 
+# fired_at = '2011-06-30 02:34:35'
+# 
+# type ='profile'
+  # end
+  
 end

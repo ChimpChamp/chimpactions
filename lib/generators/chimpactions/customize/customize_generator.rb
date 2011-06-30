@@ -12,6 +12,7 @@ module Chimpactions
           copy_file "new.html.erb", "app/views/chimpactions/new.html.erb"
           copy_file "_form.html.erb", "app/views/chimpactions/_form.html.erb"
           copy_file "_errors.html.erb", "app/views/chimpactions/_errors.html.erb"
+          copy_file "webhooks.html.erb", "app/views/chimpactions/webhooks.html.erb"
       end
     end
   end
