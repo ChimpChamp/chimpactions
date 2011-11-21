@@ -1,4 +1,4 @@
-mailchimp_api_key: aefe9dae400a886bf13ac7eee94e7528-us2
+mailchimp_api_key: YOURCHIMPACTIONSAPIKEY
 # Mappings of YOUR MailChimp Merge Variables
 # => This list should include ANY merge variables throughout your MailChimp
 #    account from any and all lists.
@@ -12,7 +12,7 @@ merge_map:
   LNAME: last_name
   EMAIL: email
   FAV_COL: favorite_color
-mailchimp_ses_key: 0987654321
+mailchimp_ses_key: YOURCHIMPACTIONSSESKEY
 default_double_optin: false #default false Require the user to reply to the MailChimp system before adding to list.
 default_send_welcome: true #default true Have MailChimp send the "Welcome" email for the list immediately.
 default_email_type:  "html"
