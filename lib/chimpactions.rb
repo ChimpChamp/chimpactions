@@ -100,7 +100,7 @@ module Chimpactions
   # @param [String] A new API key
   def self.change_account(new_api_key)
     self.mailchimp_api_key = new_api_key
-    self.socket = Gibbon::API.new(self.mailchimp_api_key)
+    self.socket = Gibbon.new(self.mailchimp_api_key)
     notify_observers self
     self.available_lists(true)
   end
@@ -128,7 +128,7 @@ module Chimpactions
     self.mailchimp_api_key = config['mailchimp_api_key']
     self.merge_map = config['merge_map']
     self.mailchimp_ses_key = config['mailchimp_ses_key']
-    self.socket = Gibbon::API.new(self.mailchimp_api_key)
+    self.socket = Gibbon.new(self.mailchimp_api_key)
     case config['action_store']
     when :yml
       if !config['actions'].blank?
