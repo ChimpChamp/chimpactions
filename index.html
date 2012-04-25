@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ChimpActions Gem by chimpchamp</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ChimpActions Gem</h1>
+        <p>Move subscribers between MailChimp lists quickly.</p>
+        <p class="view"><a href="https://github.com/chimpchamp/chimpactions">View the Project on GitHub <small>chimpchamp/chimpactions</small></a></p>
+        <ul>
+          <li><a href="https://github.com/chimpchamp/chimpactions/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/chimpchamp/chimpactions/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/chimpchamp/chimpactions">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>Requirements</h2>
+
+<p>A <a href="http://chimpchamp.com/mc">MailChimp account</a> and <a href="http://admin.mailchimp.com/account/api">API key</a>.</p>
+
+<h2>Installation</h2>
+
+<h3>Base</h3>
+
+<ol>
+<li>
+<p><em><strong>Gemfile</strong></em> -&gt; </p>
+<pre>gem "chimpactions", "~&gt; 0.0.1"</pre>
+</li>
+<li>
+<p>Install: </p>
+<pre>rails generate chimpactions:install</pre>
+</li>
+<li><p><em>Edit config/chimpactions.yml</em> with your information.</p></li>
+<li>
+<p>add "Subscriber" to your model:</p>
+<pre>include Chimpactions::Subscriber</pre>
+</li>
+<li>
+<p>(If you want) add to your model: </p>
+<pre>after_save :chimpactions</pre>
+</li>
+</ol><p>The YourModel.chimpactions method fires the actions to move subscribers as specified.</p>
+
+<p>Generates: </p>
+
+<ul>
+<li>config/chimpactions.yml config file</li>
+</ul><h3>ActiveRecord store</h3>
+
+<pre>rails generate chimpactions:migration </pre>
+
+<pre> rake db:migrate </pre>
+
+<p>Generates:</p>
+
+<ul>
+<li>chimpactions ActiveRecord migration</li>
+</ul><h3>Customizing Admin</h3>
+
+<p>Chimpactions provides a basic scaffold for managing ActiveRecord Actions @ http:yourapp/chimpactions.
+To override the gem views :</p>
+
+<pre>rails generate chimpactions:customize </pre>
+
+<p>Generates: </p>
+
+<ul>
+<li>chimpactions view files for administrative interface</li>
+<li>yourapp/app/views/chimpactions</li>
+</ul><h2>Configuration</h2>
+
+<p><em>See installed config/chimpactions.yml for configuration options</em></p>
+
+<h2>Usage</h2>
+
+<h3>What's available</h3>
+
+<p>Once defined (in chimpactions.yml) the local Rails model inherits the following methods from the Chimpactions gem :</p>
+
+<ul>
+<li>add_to(List)</li>
+<li>move_to(List)</li>
+<li>remove_from(List)</li>
+</ul><h3>A Chimpaction :</h3>
+
+<p><strong>WHENN (A model method/attribute) IS (&lt;,&gt;,=) VALUE, ACTION (Chimpactions method) LIST (One of your MailChimp Lists)</strong></p>
+
+<p>ex.</p>
+
+<p>'When a user has more than 50 posts, move them to the Power Poster list'</p>
+
+<p><em><strong>in chimpactions.yml</strong></em></p>
+
+<pre>  action:
+    -
+    action: :move_to,
+    list: Power Posters,
+    whenn: posts.count,
+    is: &gt;,
+    value: 50
+    -
+</pre>
+
+<p><strong><em>for ActiveRecord store</em></strong></p>
+
+<p>The admin interface should be a straightforward representation. </p>
+
+<h3>Administrative Interface</h3>
+
+<p>Direct your browser to <a href="http://yourapp.chimpactions">http://yourapp.chimpactions</a> for a simple CRUD to build and manage Actions.
+Available values are set in the forms where applicable, validations will tell you if a value won't work.</p>
+
+<h3>Manual access</h3>
+
+<p>You can move subscribers around arbitrarily as well:</p>
+
+<pre>user = User.find(123)
+user.remove_from("Power Posters") 
+</pre>
+
+<h3>Chimpactions Module</h3>
+
+<p>All your lists with a ton of info: </p>
+
+<pre>@lists = Chimpactions.available_lists
+...view
+
+</pre>
+
+<p>Calling the MailChimp API directly: </p>
+
+<p>Direct access to the "gibbon":<a href="http://rubygems.org/gems/gibbon/">http://rubygems.org/gems/gibbon/</a> socket :</p>
+
+<pre>api_result = Chimpactions.socket.campaigns({:start =&gt; 0, :limit =&gt; 100})
+</pre>
+
+<h3>Webhooks</h3>
+
+<p>To register your application with your MailChimp List direct your browser to : http://yourapp/chimpactions/webhooks</p>
+
+<p>The links next to each list will add/delete the webhook http://yourapp/chimpactions/receive to that list.</p>
+
+<p>You must handle the post itself in </p><pre> receive_webhook(mc_post_data) </pre> in your mix-in model for it have an effect.
+
+<h2>TODO</h2>
+
+<ul>
+<li>Implement VCR for tests so we don't have to use a real API key</li>
+<li>Get loading so we don't have to add <pre>include Chimpactions::Subscriber</pre> in the model</li>
+</ul><h2>License</h2>
+
+<p>This project released under the MIT-LICENSE.</p>
+
+<h2>Thanks</h2>
+
+<p>Made possible by the generous support of the <a href="http://www.mailchimp.com/about/integration-fund/">MailChimp Integration Fund</a>.</p>
+
+<h2>Copyrights</h2>
+
+<p>(c) <a href="http://chimpchamp.com">ChimpChamp</a> 2011 - 2012 - Released under the MIT license.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/chimpchamp">chimpchamp</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
