@@ -4,7 +4,7 @@ Easily move contacts between MailChimp lists in your Rails 3 application.
 
 h2. Requirements
 
-A MailChimp account and "API key":http://admin.mailchimp.com/account/api.
+A "MailChimp account":http://chimpchamp.com/mc and "API key":http://admin.mailchimp.com/account/api.
 
 h2. Installation
 
